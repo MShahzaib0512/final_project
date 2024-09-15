@@ -55,7 +55,7 @@ ROOT_URLCONF = 'final_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,'Html'],
+        'DIRS': [BASE_DIR,'ecommerce/Html'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

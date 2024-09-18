@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -12,16 +13,16 @@
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="assets/css/style.min.css" rel="stylesheet" />
-	<link href="assets/css/style-responsive.min.css" rel="stylesheet" />
-	<link href="assets/css/theme/default.css" id="theme" rel="stylesheet" />
-	<link href="assets/css/animate.min.css" rel="stylesheet" />
+	<link href="{% static 'Html/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'Html/assets/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'Html/assets/css/style.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'Html/assets/css/style-responsive.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'Html/assets/css/theme/default.css' %}" id="theme" rel="stylesheet" />
+	<link href="{% static 'Html/assets/css/animate.min.css' %}" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="assets/plugins/pace/pace.min.js"></script>
+	<script src="{% static 'Html/assets/plugins/pace/pace.min.js' %}"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
 <body>
@@ -34,13 +35,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown dropdown-hover">
-                            <a href="#" data-toggle="dropdown"><img src="assets/img/english.png" class="flag-img" alt="" /> English <i class="fa fa-angle-down"></i></a>
+                            <a href="#" data-toggle="dropdown"><img src="{% static 'Html/assets/img/english.png' %}" class="flag-img" alt="" /> English <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><img src="assets/img/english.png" class="flag-img" alt="" /> English</a></li>
-                                <li><a href="#"><img src="assets/img/german.png" class="flag-img" alt="" /> German</a></li>
-                                <li><a href="#"><img src="assets/img/spanish.png" class="flag-img" alt="" /> Spanish</a></li>
-                                <li><a href="#"><img src="assets/img/french.png" class="flag-img" alt="" /> French</a></li>
-                                <li><a href="#"><img src="assets/img/chinese.png" class="flag-img" alt="" /> Chinese</a></li>
+                                <li><a href="#"><img src="{% static 'Html/assets/img/english.png' %}" class="flag-img" alt="" /> English</a></li>
+                                <li><a href="#"><img src="{% static 'Html/assets/img/german.png' %}" class="flag-img" alt="" /> German</a></li>
+                                <li><a href="#"><img src="{% static 'Html/assets/img/spanish.png' %}" class="flag-img" alt="" /> Spanish</a></li>
+                                <li><a href="#"><img src="{% static 'Html/assets/img/french.png' %}" class="flag-img" alt="" /> French</a></li>
+                                <li><a href="#"><img src="{% static 'Html/assets/img/chinese.png' %}" class="flag-img" alt="" /> Chinese</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Customer Care</a></li>
@@ -76,7 +77,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="header-logo">
-                            <a href="index.html">
+                            <a href="{% url 'index' %}">
                                 <span class="brand"></span>
                                 <span>Color</span>Admin
                                 <small>e-commerce frontend theme</small>
@@ -88,7 +89,7 @@
                     <div class="header-nav">
                         <div class=" collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'index' %}">Home</a></li>
                                 <li class="dropdown dropdown-full-width dropdown-hover">
                                     <a href="#" data-toggle="dropdown">
                                         Our Store 
@@ -119,50 +120,50 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <ul class="dropdown-menu-list">
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 7</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 6s</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 6</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 5s</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 5</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 7</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 6s</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 6</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 5s</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> iPhone 5</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <ul class="dropdown-menu-list">
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy S7</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy A9</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy J3</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy Note 5</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy S7</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy S7</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy A9</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy J3</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy Note 5</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Galaxy S7</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <ul class="dropdown-menu-list">
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 730</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 735</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 830</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 820</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia Icon</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 730</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 735</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 830</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia 820</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Lumia Icon</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <ul class="dropdown-menu-list">
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia X</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia Z5</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia M5</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia C5</a></li>
-                                                            <li><a href="product_detail.html"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia C4</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia X</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia Z5</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia M5</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia C5</a></li>
+                                                            <li><a href="{% url 'product_detail' %}"><i class="fa fa-fw fa-angle-right text-muted"></i> Xperia C4</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <h4 class="title">Shop By Brand</h4>
                                                 <ul class="dropdown-brand-list m-b-0">
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/apple.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/samsung.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/htc.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/microsoft.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/nokia.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/blackberry.png" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="assets/img/sony.png" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/apple.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/samsung.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/htc.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/microsoft.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/nokia.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/blackberry.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/sony.png' %}" alt="" /></a></li>
                                                 </ul>
                                             </div>
                                             <!-- END dropdown-menu-content -->
@@ -195,19 +196,19 @@
                                         <span class="arrow top"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="index.html">Home (Default)</a></li>
-                                        <li><a href="index_fixed_header.html">Home (Fixed Header)</a></li>
-                                        <li><a href="index_inverse_header.html">Home (Inverse Header)</a></li>
-                                        <li><a href="search_results.html">Search Results</a></li>
+                                        <li><a href="{% url 'index' %}">Home (Default)</a></li>
+                                        <li><a href="{% url 'index_fixed_header' %}">Home (Fixed Header)</a></li>
+                                        <li><a href="{% url 'index_inverse_header' %}">Home (Inverse Header)</a></li>
+                                        <li><a href="{% url 'search_results' %}">Search Results</a></li>
                                         <li><a href="{% url 'product' %}">Product Page</a></li>
-                                        <li><a href="product_detail.html">Product Details Page</a></li>
-                                        <li><a href="checkout_cart.html">Checkout Cart</a></li>
-                                        <li><a href="checkout_info.html">Checkout Shipping</a></li>
-                                        <li><a href="checkout_payment.html">Checkout Payment</a></li>
-                                        <li><a href="checkout_complete.html">Checkout Complete</a></li>
-                                        <li><a href="my_account.html">My Account</a></li>
-                                        <li><a href="contact_us.html">Contact Us</a></li>
-                                        <li><a href="about_us.html">About Us</a></li>
+                                        <li><a href="{% url 'product_detail' %}">Product Details Page</a></li>
+                                        <li><a href="{% url 'checkout_cart' %}">Checkout Cart</a></li>
+                                        <li><a href="{% url 'checkout_info' %}">Checkout Shipping</a></li>
+                                        <li><a href="{% url 'checkout_payment' %}">Checkout Payment</a></li>
+                                        <li><a href="{% url 'checkout_complete' %}">Checkout Complete</a></li>
+                                        <li><a href="{% url 'my_account' %}">My Account</a></li>
+                                        <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                                        <li><a href="{% url 'about_us' %}">About Us</a></li>
                                         <li><a href="{% url 'faq' %}">FAQ</a></li>
                                     </ul>
                                 </li>
@@ -217,7 +218,7 @@
                                         <span class="arrow top"></span>
                                     </a>
                                     <div class="dropdown-menu p-15">
-                                        <form action="search_results.html" method="POST" name="search_form">
+                                        <form action="{% url 'search_results' %}" method="POST" name="search_form">
                                             <div class="input-group">
                                                 <input type="text" placeholder="Search" class="form-control bg-silver-lighter" />
                                                 <span class="input-group-btn">
@@ -248,7 +249,7 @@
                                     <div class="cart-body">
                                         <ul class="cart-item">
                                             <li>
-                                                <div class="cart-item-image"><img src="assets/img/ipad.jpg" alt="" /></div>
+                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/ipad.jpg' %}" alt="" /></div>
                                                 <div class="cart-item-info">
                                                     <h4>iPad Pro Wi-Fi 128GB - Silver</h4>
                                                     <p class="price">$699.00</p>
@@ -258,7 +259,7 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="cart-item-image"><img src="assets/img/imac.jpg" alt="" /></div>
+                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/imac.jpg' %}" alt="" /></div>
                                                 <div class="cart-item-info">
                                                     <h4>21.5-inch iMac</h4>
                                                     <p class="price">$1299.00</p>
@@ -268,7 +269,7 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="cart-item-image"><img src="assets/img/iphone.png" alt="" /></div>
+                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/iphone.png' %}" alt="" /></div>
                                                 <div class="cart-item-info">
                                                     <h4>iPhone 6s 16GB - Silver</h4>
                                                     <p class="price">$649.00</p>
@@ -282,10 +283,10 @@
                                     <div class="cart-footer">
                                         <div class="row row-space-10">
                                             <div class="col-xs-6">
-                                                <a href="checkout_cart.html" class="btn btn-default btn-block">View Cart</a>
+                                                <a href="{% url 'checkout_cart' %}" class="btn btn-default btn-block">View Cart</a>
                                             </div>
                                             <div class="col-xs-6">
-                                                <a href="checkout_cart.html" class="btn btn-inverse btn-block">Checkout</a>
+                                                <a href="{% url 'checkout_cart' %}" class="btn btn-inverse btn-block">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -293,8 +294,8 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="my_account.html">
-                                    <img src="assets/img/user-1.jpg" class="user-img" alt="" /> 
+                                <a href="{% url 'my_account' %}">
+                                    <img src="{% static 'Html/assets/img/user-1.jpg' %}" class="user-img" alt="" /> 
                                     <span class="hidden-md hidden-sm hidden-xs">Login / Register</span>
                                 </a>
                             </li>
@@ -312,7 +313,7 @@
         <div id="page-header" class="section-container page-header-container bg-black">
             <!-- BEGIN page-header-cover -->
             <div class="page-header-cover">
-                <img src="assets/img/search-cover.jpg" alt="" />
+                <img src="{% static 'Html/assets/img/search-cover.jpg' %}" alt="" />
             </div>
             <!-- END page-header-cover -->
             <!-- BEGIN container -->
@@ -361,13 +362,13 @@
                             <div class="item-row">
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/iphone.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/iphone.png' %}" alt="" />
                                         <div class="discount">15% OFF</div>
                                     </a>
                                     <div class="item-info">
                                         <h4 class="item-title">
-                                            <a href="product_detail.html">iPhone 6s Plus<br />16GB</a>
+                                            <a href="{% url 'product_detail' %}">iPhone 6s Plus<br />16GB</a>
                                         </h4>
                                         <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
                                         <div class="item-price">$649.00</div>
@@ -377,8 +378,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/samsung-note5.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/samsung-note5.png' %}" alt="" />
                                         <div class="discount">32% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -393,8 +394,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/iphone-se.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/iphone-se.png' %}" alt="" />
                                         <div class="discount">20% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -413,13 +414,13 @@
                             <div class="item-row">
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/zenfone2.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/zenfone2.png' %}" alt="" />
                                         <div class="discount">15% OFF</div>
                                     </a>
                                     <div class="item-info">
                                         <h4 class="item-title">
-                                            <a href="product_detail.html">Assus ZenFone 2<br />‏(ZE550ML)</a>
+                                            <a href="{% url 'product_detail' %}">Assus ZenFone 2<br />‏(ZE550ML)</a>
                                         </h4>
                                         <p class="item-desc">See What Others Can’t See</p>
                                         <div class="item-price">$399.00</div>
@@ -429,8 +430,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/xperia-z.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/xperia-z.png' %}" alt="" />
                                         <div class="discount">32% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -445,8 +446,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/lumia-532.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/lumia-532.png' %}" alt="" />
                                         <div class="discount">20% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -465,13 +466,13 @@
                             <div class="item-row">
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/ipad-pro.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/ipad-pro.png' %}" alt="" />
                                         <div class="discount">15% OFF</div>
                                     </a>
                                     <div class="item-info">
                                         <h4 class="item-title">
-                                            <a href="product_detail.html">9.7-inch iPad Pro<br />32GB</a>
+                                            <a href="{% url 'product_detail' %}">9.7-inch iPad Pro<br />32GB</a>
                                         </h4>
                                         <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
                                         <div class="item-price">$649.00</div>
@@ -481,8 +482,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/galaxy-tab2.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/galaxy-tab2.png' %}" alt="" />
                                         <div class="discount">32% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -497,8 +498,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/galaxy-taba.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/galaxy-taba.png' %}" alt="" />
                                         <div class="discount">20% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -517,13 +518,13 @@
                             <div class="item-row">
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/hp-spectrex2.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/hp-spectrex2.png' %}" alt="" />
                                         <div class="discount">15% OFF</div>
                                     </a>
                                     <div class="item-info">
                                         <h4 class="item-title">
-                                            <a href="product_detail.html">HP Spectre x2<br />‏12-a011nr</a>
+                                            <a href="{% url 'product_detail' %}">HP Spectre x2<br />‏12-a011nr</a>
                                         </h4>
                                         <p class="item-desc">Our thinnest detachable separates from all others.</p>
                                         <div class="item-price">$799.99</div>
@@ -533,8 +534,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/xperia-z2.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/xperia-z2.png' %}" alt="" />
                                         <div class="discount">32% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -549,8 +550,8 @@
                                 <!-- END item -->
                                 <!-- BEGIN item -->
                                 <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        <img src="assets/img/ipad-air.png" alt="" />
+                                    <a href="{% url 'product_detail' %}" class="item-image">
+                                        <img src="{% static 'Html/assets/img/ipad-air.png' %}" alt="" />
                                         <div class="discount">20% OFF</div>
                                     </a>
                                     <div class="item-info">
@@ -585,7 +586,7 @@
                     <!-- BEGIN search-sidebar -->
                     <div class="search-sidebar">
                         <h4 class="title">Filter By</h4>
-                        <form action="search_results.html" method="POST" name="filter_form">
+                        <form action="{% url 'search_results' %}" method="POST" name="filter_form">
                             <div class="form-group">
                                 <label class="control-label">Keywords</label>
                                 <input type="text" class="form-control input-sm" name="keyword" value="Mobile Phones" placeholder="Enter Keywords" />
@@ -667,7 +668,7 @@
                         <ul class="list-unstyled list-product">
                             <li>
                                 <div class="image">
-                                    <img src="assets/img/iphone-6s.jpg" alt="" />
+                                    <img src="{% static 'Html/assets/img/iphone-6s.jpg' %}" alt="" />
                                 </div>
                                 <div class="info">
                                     <h4 class="info-title">Iphone 6s</h4>
@@ -676,7 +677,7 @@
                             </li>
                             <li>
                                 <div class="image">
-                                    <img src="assets/img/galaxy-s6.jpg" alt="" />
+                                    <img src="{% static 'Html/assets/img/galaxy-s6.jpg' %}" alt="" />
                                 </div>
                                 <div class="info">
                                     <h4 class="info-title">Samsung Galaxy s7</h4>
@@ -686,7 +687,7 @@
                         
                             <li>
                                 <div class="image">
-                                    <img src="assets/img/ipad-pro.jpg" alt="" />
+                                    <img src="{% static 'Html/assets/img/ipad-pro.jpg' %}" alt="" />
                                 </div>
                                 <div class="info">
                                     <h4 class="info-title">Ipad Pro</h4>
@@ -695,7 +696,7 @@
                             </li>
                             <li>
                                 <div class="image">
-                                    <img src="assets/img/galaxy-note5.jpg" alt="" />
+                                    <img src="{% static 'Html/assets/img/galaxy-note5.jpg' %}" alt="" />
                                 </div>
                                 <div class="info">
                                     <h4 class="info-title">Samsung Galaxy Note 5</h4>
@@ -731,7 +732,7 @@
             <!-- BEGIN container -->
             <div class="container">
                 <div class="payment-method">
-                    <img src="assets/img/payment_method.png" alt="" />
+                    <img src="{% static 'Html/assets/img/payment_method.png' %}" alt="" />
                 </div>
                 <div class="copyright">
                     Copyright &copy; 2016 SeanTheme. All rights reserved.
@@ -759,16 +760,16 @@
     <!-- end theme-panel -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-	<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{% static 'Html/assets/plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+	<script src="{% static 'Html/assets/plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+	<script src="{% static 'Html/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
 	<!--[if lt IE 9]>
 		<script src="assets/crossbrowserjs/html5shiv.js"></script>
 		<script src="assets/crossbrowserjs/respond.min.js"></script>
 		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
-	<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-	<script src="assets/js/apps.min.js"></script>
+	<script src="{% static 'Html/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+	<script src="{% static 'Html/assets/js/apps.min.js' %}"></script>
 	<!-- ================== END BASE JS ================== -->
 	
 	<script>

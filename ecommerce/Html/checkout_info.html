@@ -349,7 +349,7 @@
                                 <!-- BEGIN col-3 -->
                                 <div class="col-md-3 col-sm-3">
                                     <div class="step">
-                                        <a href="{% url checkout_payment %}">
+                                        <a href="{% url 'checkout_payment' %}">
                                             <div class="number">3</div>
                                             <div class="info">
                                                 <div class="title">Payment</div>
@@ -462,7 +462,7 @@
                         <!-- END checkout-body -->
                         <!-- BEGIN checkout-footer -->
                         <div class="checkout-footer">
-                            <a href="{% url '' %}" class="btn btn-white btn-lg pull-left">Back</a>
+                            <a href="{% url 'checkout_cart' %}" class="btn btn-white btn-lg pull-left">Back</a>
                             <button type="submit" class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10">Continue</button>
                         </div>
                         <!-- END checkout-footer -->
@@ -660,9 +660,9 @@
 	<script src="{% static 'Html/assets/plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
 	<script src="{% static 'Html/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
 	<!--[if lt IE 9]>
-		<script src="assets/crossbrowserjs/html5shiv.js"></script>
-		<script src="assets/crossbrowserjs/respond.min.js"></script>
-		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+		<script src="{% static 'Html/assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="{% static 'Html/assets/crossbrowserjs/respond.min.js"></script>
+		<script src="{% static 'Html/assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 	<script src="{% static 'Html/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
 	<script src="{% static 'Html/assets/js/apps.min.js' %}"></script>

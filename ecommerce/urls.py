@@ -16,4 +16,6 @@ urlpatterns = [
  path('my_account',views.my_account, name='my_account'),
  path('product_detail',views.product_detail, name='product_detail'),
  path('search_results',views.search_results, name='search_results'),
+ path('loginuser',views.loginuser, name='loginuser'),
+ path('register',views.register, name='register'),
 ]

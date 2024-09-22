@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
- return render(request,'index.html')
+ user=request.user
+ return render(request,'index.html',{'user':user})
 
 def product(request):
  return render(request,'product.html')
@@ -42,3 +43,9 @@ def product_detail(request):
 
 def search_results(request):
  return render(request, 'search_results.html')
+
+def loginuser(request):
+ return render(request,'contact_us.html')
+
+def register(request):
+ return render(request,'contact_us.html')

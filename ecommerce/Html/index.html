@@ -295,7 +295,7 @@
                             {% if user.is_authenticated %}
                             <li class="divider"></li>
                             <li>
-                                <a href="{% url 'my_account' %}">
+                                <a href="{% url 'logoutuser' %}">
                                     <img src="{% static 'Html/assets/img/user-1.jpg' %}" class="user-img" alt="" /> 
                                     <span class="hidden-md hidden-sm hidden-xs">Logout</span>
                                 </a>
@@ -308,11 +308,11 @@
                                 </a>
                             </li>
                             <li class="divider"></li>
-                            <li>
+                            <!-- <li>
                                 <a href="{% url 'register' %}">
                                     <span class="hidden-md hidden-sm hidden-xs">Register</span>
                                 </a>
-                            </li>
+                            </li> -->
                             {% endif %}
                         </ul>
                     </div>

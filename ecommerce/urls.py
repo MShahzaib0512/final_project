@@ -18,4 +18,5 @@ urlpatterns = [
  path('search_results',views.search_results, name='search_results'),
  path('loginuser',views.loginuser, name='loginuser'),
  path('register',views.register, name='register'),
+ path('logoutuser',views.logoutuser, name='logoutuser'),
 ]

@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 # Create your views here.
 def index(request):
- user=request.user
- return render(request,'index.html',{'user':user})
+  return render(request,'index.html')
+def login_index(request):
+  user =User.objects.get(username=request.user)
+  return render(request, 'index.html', {'user': user})
 
 def product(request):
  return render(request,'product.html')
@@ -52,8 +54,8 @@ def loginuser(request):
   
   user=authenticate(username=uname,password=passw)
   if user is not None:
-   login(request,user)
-   return redirect('index')
+   auth_login(request,user)
+   return redirect('login_index')
   
  return render(request,'login.html')
 
@@ -73,5 +75,5 @@ def register(request):
   return redirect('loginuser')
  return render(request,'register.html')
 def logoutuser(request):
- logout(request)
+ auth_logout(request)
  return redirect('index')

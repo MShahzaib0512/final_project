@@ -296,7 +296,7 @@
                             <li class="divider"></li>
                             <li>
                                 <a href="{% url 'logoutuser' %}">
-                                    <img src="{% static 'Html/assets/img/user-1.jpg' %}" class="user-img" alt="" /> 
+                                    <img src="{{user.profile.image.url}}" class="user-img" alt="" /> 
                                     <span class="hidden-md hidden-sm hidden-xs">Logout</span>
                                 </a>
                             </li>

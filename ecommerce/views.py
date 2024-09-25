@@ -1,12 +1,24 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
+from .models import *
 # Create your views here.
 def index(request):
-  return render(request,'index.html')
+  catogery_items=category.objects.all()
+  brand_img=brand.objects.all()
+  mobile_name = category.objects.get(name='Mobile phones')
+  top_brand=brand.objects.filter(top_catogery=True)
+  trending_products=products.objects.filter(trending=True)
+  mobile=products.objects.filter(catogery=mobile_name)
+  return render(request,'index.html',{'catogery':catogery_items, 'Brands':brand_img, 'top_brand':top_brand, 'trending_products':trending_products,'mobile':mobile})
+
+
 def login_index(request):
+  catogery_items=category.objects.all()
+  brand_img=brand.objects.all()
+  top_brand=brand.objects.filter(top_catogery=True)
   user =User.objects.get(username=request.user)
-  return render(request, 'index.html', {'user': user})
+  return render(request, 'index.html', {'user': user, 'catogery':catogery_items, 'Brands':brand_img, 'top_brand':top_brand})
 
 def product(request):
  return render(request,'product.html')
@@ -72,6 +84,12 @@ def register(request):
   myuser.first_name=fname
   myuser.last_name=lname
   myuser.save()
+  print('user created ')
+  
+  if 'image' in request.FILES:
+    profile_img = profile(user=myuser)
+    profile_img.image = request.FILES['image']
+    profile_img.save()
   return redirect('loginuser')
  return render(request,'register.html')
 def logoutuser(request):

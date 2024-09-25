@@ -104,13 +104,15 @@
                                             <div class="dropdown-menu-sidebar">
                                                 <h4 class="title">Shop By Categories</h4>
                                                 <ul class="dropdown-menu-list">
-                                                    <li><a href="{% url 'product' %}">Mobile Phone <i class="fa fa-angle-right pull-right"></i></a></li>
-                                                    <li><a href="{% url 'product' %}">Tablet <i class="fa fa-angle-right pull-right"></i></a></li>
+                                                    {% for catogery in catogery %}
+                                                    <li><a href="{% url 'product' %}">{{catogery.name}}<i class="fa fa-angle-right pull-right"></i></a></li>
+                                                    {% endfor %}
+                                                    <!-- <li><a href="{% url 'product' %}">Tablet <i class="fa fa-angle-right pull-right"></i></a></li>
                                                     <li><a href="{% url 'product' %}">Laptop <i class="fa fa-angle-right pull-right"></i></a></li>
                                                     <li><a href="{% url 'product' %}">Desktop <i class="fa fa-angle-right pull-right"></i></a></li>
                                                     <li><a href="{% url 'product' %}">TV <i class="fa fa-angle-right pull-right"></i></a></li>
                                                     <li><a href="{% url 'product' %}">Speaker <i class="fa fa-angle-right pull-right"></i></a></li>
-                                                    <li><a href="{% url 'product' %}">Gadget <i class="fa fa-angle-right pull-right"></i></a></li>
+                                                    <li><a href="{% url 'product' %}">Gadget <i class="fa fa-angle-right pull-right"></i></a></li> -->
                                                 </ul>
                                             </div>
                                             <!-- END dropdown-menu-sidebar -->
@@ -157,13 +159,15 @@
                                                 </div>
                                                 <h4 class="title">Shop By Brand</h4>
                                                 <ul class="dropdown-brand-list m-b-0">
-                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/apple.png' %}" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/samsung.png' %}" alt="" /></a></li>
+                                                    {% for brand in Brands %}
+                                                    <li><a href="{% url 'product' %}"><img src="{{brand.image.url}}" alt="" /></a></li>
+                                                    {% endfor %}
+                                                    <!-- <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/samsung.png' %}" alt="" /></a></li>
                                                     <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/htc.png' %}" alt="" /></a></li>
                                                     <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/microsoft.png' %}" alt="" /></a></li>
                                                     <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/nokia.png' %}" alt="" /></a></li>
                                                     <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/blackberry.png' %}" alt="" /></a></li>
-                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/sony.png' %}" alt="" /></a></li>
+                                                    <li><a href="{% url 'product' %}"><img src="{% static 'Html/assets/img/sony.png' %}" alt="" /></a></li> -->
                                                 </ul>
                                             </div>
                                             <!-- END dropdown-menu-content -->
@@ -501,124 +505,26 @@
                 <!-- BEGIN row -->
                 <div class="row row-space-10">
                     <!-- BEGIN col-2 -->
+                     {% for i in trending_products %}
                     <div class="col-md-2 col-sm-4">
                         <!-- BEGIN item -->
                         <div class="item item-thumbnail">
                             <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/iphone.png' %}" alt="" />
-                                <div class="discount">15% OFF</div>
+                                <img src="{{i.image.url}}" alt="" />
+                                <div class="discount">{{i.flat}}% OFF</div>
                             </a>
                             <div class="item-info">
                                 <h4 class="item-title">
-                                    <a href="{% url 'product_detail' %}">iPhone 6s Plus<br />16GB</a>
+                                    <a href="{% url 'product_detail' %}">{{i.name}}<br/>{{i.storage}}</a>
                                 </h4>
-                                <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
-                                <div class="item-price">$649.00</div>
-                                <div class="item-discount-price">$739.00</div>
+                                <p class="item-desc">{{i.description}}</p>
+                                <div class="item-price">{{i.disc_price}}</div>
+                                <div class="item-discount-price">{{i.price}}</div>
                             </div>
                         </div>
                         <!-- END item -->
                     </div>
-                    <!-- END col-2 -->
-                    <!-- BEGIN col-2 -->
-                    <div class="col-md-2 col-sm-4">
-                        <!-- BEGIN item -->
-                        <div class="item item-thumbnail">
-                            <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/ipad-pro.png' %}" alt=""  />
-                                <div class="discount">32% OFF</div>
-                            </a>
-                            <div class="item-info">
-                                <h4 class="item-title">
-                                    <a href="{% url 'product' %}">9.7-inch iPad Pro<br />32GB</a>
-                                </h4>
-                                <p class="item-desc">Super. Computer. Now in two sizes.</p>
-                                <div class="item-price">$599.00</div>
-                                <div class="item-discount-price">$799.00</div>
-                            </div>
-                        </div>
-                        <!-- END item -->
-                    </div>
-                    <!-- END col-2 -->
-                    <!-- BEGIN col-2 -->
-                    <div class="col-md-2 col-sm-4">
-                        <!-- BEGIN item -->
-                        <div class="item item-thumbnail">
-                            <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/imac.png' %}" alt="" />
-                                <div class="discount">20% OFF</div>
-                            </a>
-                            <div class="item-info">
-                                <h4 class="item-title">
-                                    <a href="{% url 'product' %}">21.5-inch iMac<br />with Retina Display</a>
-                                </h4>
-                                <p class="item-desc">Retina. Now in colossal and ginormous.</p>
-                                <div class="item-price">$1,099.00</div>
-                                <div class="item-discount-price">$1,299.00</div>
-                            </div>
-                        </div>
-                        <!-- END item -->
-                    </div>
-                    <!-- END col-2 -->
-                    <!-- BEGIN col-2 -->
-                    <div class="col-md-2 col-sm-4">
-                        <!-- BEGIN item -->
-                        <div class="item item-thumbnail">
-                            <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/apple-watch.png' %}" alt="" />
-                                <div class="discount">13% OFF</div>
-                            </a>
-                            <div class="item-info">
-                                <h4 class="item-title">
-                                    <a href="{% url 'product' %}">Apple Watch<br />Stainless steel cases</a>
-                                </h4>
-                                <p class="item-desc">You. At a glance.</p>
-                                <div class="item-price">$599.00</div>
-                                <div class="item-discount-price">$799.00</div>
-                            </div>
-                        </div>
-                        <!-- END item -->
-                    </div>
-                    <!-- END col-2 -->
-                    <!-- BEGIN col-2 -->
-                    <div class="col-md-2 col-sm-4">
-                        <!-- BEGIN item -->
-                        <div class="item item-thumbnail">
-                            <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/macbook-pro.png' %}" alt="" />
-                                <div class="discount">30% OFF</div>
-                            </a>
-                            <div class="item-info">
-                                <h4 class="item-title">
-                                    <a href="{% url 'product' %}">MacBook Pro<br />with Retina Display</a>
-                                </h4>
-                                <p class="item-desc">Stunning Retina Display</p>
-                                <div class="item-price">$1299.00</div>
-                                <div class="item-discount-price">$1499.00</div>
-                            </div>
-                        </div>
-                        <!-- END item -->
-                    </div>
-                    <!-- END col-2 -->
-                    <!-- BEGIN col-2 -->
-                    <div class="col-md-2 col-sm-4">
-                        <!-- BEGIN item -->
-                        <div class="item item-thumbnail">
-                            <a href="{% url 'product_detail' %}" class="item-image">
-                                <img src="{% static 'Html/assets/img/apple-tv.png' %}" alt="" />
-                                <div class="discount">40% OFF</div>
-                            </a>
-                            <div class="item-info">
-                                <h4 class="item-title">
-                                    <a href="{% url 'product' %}">Apple Tv<br />32GB</a>
-                                </h4>
-                                <p class="item-desc">The future of television is here.</p>
-                                <div class="item-price">$149.00</div>
-                                <div class="item-discount-price">$249.00</div>
-                            </div>
-                        </div>
-                        <!-- END item -->
-                    </div>
+                    {% endfor %}
                     <!-- END col-2 -->
                 </div>
                 <!-- END row -->
@@ -643,18 +549,11 @@
                     <!-- BEGIN category-sidebar -->
                     <div class="category-sidebar">
                         <ul class="category-list">
-                            <li class="list-header">Top Categories</li>
-                            <li><a href="#">Microsoft</a></li>
-                            <li><a href="#">Samsung</a></li>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">Micromax</a></li>
-                            <li><a href="#">Karbonn</a></li>
-                            <li><a href="#">Intex</a></li>
-                            <li><a href="#">Sony</a></li>
-                            <li><a href="#">HTC</a></li>
-                            <li><a href="#">Asus</a></li>
-                            <li><a href="#">Nokia</a></li>
-                            <li><a href="#">Blackberry</a></li>
+                            <li class="list-header">Top Brands</li>
+                            
+                            {% for item in top_brand %}
+                            <li><a href="#">{{item}}</a></li>
+                            {% endfor %}
                             <li><a href="#">All Brands</a></li>
                         </ul>
                     </div>
@@ -665,12 +564,12 @@
                         <a href="#" class="category-item full">
                             <div class="item">
                                 <div class="item-cover">
-                                    <img src="{% static 'Html/assets/img/samsung-s7-edge.jpg' %}" alt="" />
+                                    <img src="{{mobile.image.url}}" alt="" />
                                 </div>
                                 <div class="item-info bottom">
-                                    <h4 class="item-title">Samsung Galaxy s7 Edge + Geat 360 + Gear VR</h4>
-                                    <p class="item-desc">Redefine what a phone can do</p>
-                                    <div class="item-price">$799.00</div>
+                                    <h4 class="item-title">{{mobile.name}}{{mobile.storage}}</h4>
+                                    <p class="item-desc">{{mobile.description}}</p>
+                                    <div class="item-price">{{mobile.price}}</div>
                                 </div>
                             </div>
                         </a>

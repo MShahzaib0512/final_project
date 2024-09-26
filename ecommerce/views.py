@@ -6,11 +6,20 @@ from .models import *
 def index(request):
   catogery_items=category.objects.all()
   brand_img=brand.objects.all()
-  mobile_name = category.objects.get(name='Mobile phones')
   top_brand=brand.objects.filter(top_catogery=True)
   trending_products=products.objects.filter(trending=True)
-  mobile=products.objects.filter(catogery=mobile_name)
-  return render(request,'index.html',{'catogery':catogery_items, 'Brands':brand_img, 'top_brand':top_brand, 'trending_products':trending_products,'mobile':mobile})
+  featured=products.objects.filter(featured=True)
+  mobile=products.objects.filter(catogery__name="Mobile")
+  tablet=products.objects.filter(catogery__name="Tablet")
+  return render(request,'index.html',{
+    'catogery':catogery_items,
+    'Brands':brand_img,
+    'top_brand':top_brand,
+    'trending_products':trending_products,
+    'mobile':mobile,
+    'tablet':tablet,
+    'featured':featured,
+    })
 
 
 def login_index(request):

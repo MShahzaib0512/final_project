@@ -6,7 +6,8 @@ from .models import *
 def index(request):
   catogery_items=category.objects.all()
   brand_img=brand.objects.all()
-  top_brand=brand.objects.filter(top_catogery=True)
+  top_mobile_brand=products.objects.filter(catogery__name='Mobile',brand__top_brand=True).distinct()
+  top_tablet_brand=products.objects.filter(catogery__name='Tablet',brand__top_brand=True).distinct()
   trending_products=products.objects.filter(trending=True)
   featured=products.objects.filter(featured=True)
   mobile=products.objects.filter(catogery__name="Mobile")
@@ -14,20 +15,36 @@ def index(request):
   return render(request,'index.html',{
     'catogery':catogery_items,
     'Brands':brand_img,
-    'top_brand':top_brand,
+    'top_brand':top_mobile_brand,
     'trending_products':trending_products,
     'mobile':mobile,
     'tablet':tablet,
     'featured':featured,
+    'top_tablet_products':top_tablet_brand,
     })
 
 
 def login_index(request):
   catogery_items=category.objects.all()
   brand_img=brand.objects.all()
-  top_brand=brand.objects.filter(top_catogery=True)
+  top_mobile_brand=products.objects.filter(catogery__name='Mobile',brand__top_brand=True).distinct()
+  top_tablet_brand=products.objects.filter(catogery__name='Tablet',brand__top_brand=True).distinct()
+  trending_products=products.objects.filter(trending=True)
+  featured=products.objects.filter(featured=True)
+  mobile=products.objects.filter(catogery__name="Mobile")
+  tablet=products.objects.filter(catogery__name="Tablet")
   user =User.objects.get(username=request.user)
-  return render(request, 'index.html', {'user': user, 'catogery':catogery_items, 'Brands':brand_img, 'top_brand':top_brand})
+  return render(request,'index.html',{
+    'catogery':catogery_items,
+    'Brands':brand_img,
+    'top_brand':top_mobile_brand,
+    'trending_products':trending_products,
+    'mobile':mobile,
+    'tablet':tablet,
+    'featured':featured,
+    'top_tablet_products':top_tablet_brand,
+    'user': user,
+    })
 
 def product(request):
  return render(request,'product.html')

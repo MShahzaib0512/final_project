@@ -171,13 +171,9 @@
                                         <span class="arrow top"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{% url 'product' %}">Mobile Phone</a></li>
-                                        <li><a href="{% url 'product' %}">Tablet</a></li>
-                                        <li><a href="{% url 'product' %}">TV</a></li>
-                                        <li><a href="{% url 'product' %}">Desktop</a></li>
-                                        <li><a href="{% url 'product' %}">Laptop</a></li>
-                                        <li><a href="{% url 'product' %}">Speaker</a></li>
-                                        <li><a href="{% url 'product' %}">Gadget</a></li>
+                                        {% for i in Brands %}
+                                        <li><a href="{% url 'product' %}">{{i.name}}</a></li>   
+                                        {% endfor %}                                      
                                     </ul>
                                 </li>
                                 <li><a href="{% url 'product' %}">New Arrival</a></li>
@@ -514,7 +510,7 @@
                             <li class="list-header">Top Brands</li>
                             
                             {% for item in top_brand %}
-                            <li><a href="#">{{item}}</a></li>
+                            <li><a href="#">{{item.brand.name}}</a></li>
                             {% endfor %}
                             <li><a href="#">All Brands</a></li>
                         </ul>
@@ -590,8 +586,8 @@
                     <div class="category-sidebar">
                         <ul class="category-list">
                             <li class="list-header">Top Categories</li>
-                            {% for tablet in top_brand %}
-                            <li><a href="#">{{tablet.name}}</a></li>
+                            {% for tablet in top_tablet_brand %}
+                            <li><a href="#">{{tablet.brand.name}}</a></li>
                             {% endfor %}
                             <li><a href="#">All Brands</a></li>
                         </ul>

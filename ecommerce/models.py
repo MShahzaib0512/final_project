@@ -33,3 +33,12 @@ class products(models.Model):
   image=models.ImageField(upload_to='images', default="")
   trending=models.BooleanField(default=False)
   featured=models.BooleanField(default=False)
+  permoted_item=models.BooleanField(default=False)
+  
+  def __str__(self):
+    return self.name
+  
+class cart(models.Model):
+  user_id=models.ForeignKey(User,on_delete=models.CASCADE)
+  pro_id=models.ForeignKey("products",on_delete=models.CASCADE)
+  

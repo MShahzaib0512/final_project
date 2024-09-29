@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 from .models import *
 from .decorator import *
+from django.contrib import messages
 # Create your views here.
 @fetch_data
 def index(request,context):
@@ -80,6 +81,22 @@ def register(request):
     profile_img.save()
   return redirect('loginuser')
  return render(request,'register.html')
+
 def logoutuser(request):
  auth_logout(request)
  return redirect('index')
+
+def add_to_cart(request,product_id):
+  user=request.user
+  if user.is_authenticated:
+    p_id=products.objects.get(id=product_id)
+    if not cart.objects.filter(user_id=user, pro_id=p_id).exists():
+      cart_instance=cart.objects.create(user_id=user,pro_id=p_id)
+      cart_instance.save()
+    else:
+      messages.info(request,'Item is already in your cart')
+      return redirect('checkout_cart') 
+  else:
+    messages.info(request,"Register yourself to our web to get advance facilities")
+    return redirect('register')
+  return redirect('index')

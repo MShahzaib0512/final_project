@@ -223,21 +223,22 @@
                     <!-- BEGIN header-nav -->
                     <div class="header-nav">
                         <ul class="nav pull-right">
+                            {% if user.is_authenticated %}
                             <li class="dropdown dropdown-hover">
                                 <a href="#" class="header-cart" data-toggle="dropdown">
                                     <i class="fa fa-shopping-bag"></i>
-                                    <span class="total">2</span>
+                                    <span class="total">{{total_cart_items}}</span>
                                     <span class="arrow top"></span>
                                 </a>
-                    
                                 <div class="dropdown-menu dropdown-menu-cart p-0">
                                     <div class="cart-header">
                                         <h4 class="cart-title">Shopping Bag (1) </h4>
                                     </div>
                                     <div class="cart-body">
                                         <ul class="cart-item">
+                                            {% for item in cart %}                                                
                                             <li>
-                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/ipad.jpg' %}" alt="" /></div>
+                                                <div class="cart-item-image"><img src="{{item.products.image.url}}" alt="" /></div>
                                                 <div class="cart-item-info">
                                                     <h4>iPad Pro Wi-Fi 128GB - Silver</h4>
                                                     <p class="price">$699.00</p>
@@ -246,26 +247,7 @@
                                                     <a href="#" data-toggle="tooltip" data-title="Remove">&times;</a>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/imac.jpg' %}" alt="" /></div>
-                                                <div class="cart-item-info">
-                                                    <h4>21.5-inch iMac</h4>
-                                                    <p class="price">$1299.00</p>
-                                                </div>
-                                                <div class="cart-item-close">
-                                                    <a href="#" data-toggle="tooltip" data-title="Remove">&times;</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cart-item-image"><img src="{% static 'Html/assets/img/iphone.png' %}" alt="" /></div>
-                                                <div class="cart-item-info">
-                                                    <h4>iPhone 6s 16GB - Silver</h4>
-                                                    <p class="price">$649.00</p>
-                                                </div>
-                                                <div class="cart-item-close">
-                                                    <a href="#" data-toggle="tooltip" data-title="Remove">&times;</a>
-                                                </div>
-                                            </li>
+                                            {% endfor %}    
                                         </ul>
                                     </div>
                                     <div class="cart-footer">
@@ -280,6 +262,7 @@
                                     </div>
                                 </div>
                             </li>
+                            {% endif %}
                             {% if user.is_authenticated %}
                             <li class="divider"></li>
                             <li>
@@ -555,6 +538,8 @@
                                             <div class="item-discount-price">${{mobile.price}}</div>
                                         </div>
                                     </div>
+                                        <a href="{% url 'add_to_cart' mobile.id %}" class="btn btn-inverse btn-lg add-to-cart" data-mobile-id="{{ mobile.id }}">ADD TO CART</a>
+
                                 </div>
                                 {% endfor %}
                                 <!-- END item-row -->

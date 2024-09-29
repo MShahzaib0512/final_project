@@ -17,3 +17,4 @@ class ProductsAdmin(admin.ModelAdmin):
 
 admin.site.register(models.products, ProductsAdmin)
 admin.site.register(models.profile)
+admin.site.register(models.cart)

@@ -15,8 +15,8 @@ def fetch_data(view_func):
         featured = products.objects.filter(featured=True)
         mobile = products.objects.filter(catogery__name="Mobile")
         tablet = products.objects.filter(catogery__name="Tablet")
-        total_cart_items=cart.objects.count()
-        Cart=cart.objects.filter(user_id=user)
+        total_cart_items=cart.objects.filter(user_id=user.id).count()
+        Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
         # Create context
         context = {
             'user':user,

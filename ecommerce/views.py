@@ -100,3 +100,8 @@ def add_to_cart(request,product_id):
     messages.info(request,"Register yourself to our web to get advance facilities")
     return redirect('register')
   return redirect('index')
+
+def remove_cart_item(request,product_id):
+  Cart=cart.objects.filter(pro_id=product_id).select_related('user_id')
+  Cart.delete()
+  return redirect('index')

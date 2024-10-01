@@ -1078,7 +1078,7 @@ a:active {
     max-height: 100%;
 }
 .item.item-thumbnail .item-info {
-    padding: 15px;
+    padding: 12px;
     text-align: center;
 }
 .item.item-thumbnail .item-title {
@@ -1114,7 +1114,7 @@ a:active {
     margin: 3px 0;
     font-size: 16px;
     color: #009688;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 

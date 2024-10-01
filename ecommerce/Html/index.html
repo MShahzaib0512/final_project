@@ -678,18 +678,17 @@
                   class="promotion-image text-right promotion-image-overflow-bottom"
                 >
                   <img
-                    src="{% static 'Html/assets/img/iphone-se.png' %}"
+                    src="{{permoted_item.0.image.url}}"
                     alt=""
                   />
                 </div>
                 <div class="promotion-caption promotion-caption-inverse">
-                  <h4 class="promotion-title">iPhone SE</h4>
-                  <div class="promotion-price"><small>from</small> $299.00</div>
+                  <h4 class="promotion-title">{{permoted_item.0.name}}</h4>
+                  <div class="promotion-price"><small>from</small> ${{permoted_item.0.price}}</div>
                   <p class="promotion-desc">
-                    A big step for small.<br />A beloved design. Now with more
-                    to love.
+                    {{permoted_item.0.description}}
                   </p>
-                  <a href="#" class="promotion-btn">View More</a>
+                  <a href="{% url 'product_details' permoted_item.0.id %}" class="promotion-btn">View More</a>
                 </div>
               </div>
               <!-- END promotion -->
@@ -703,17 +702,17 @@
                   class="promotion-image promotion-image-overflow-bottom promotion-image-overflow-top"
                 >
                   <img
-                    src="{% static 'Html/assets/img/apple-watch-sm.png' %}"
-                    alt=""
+                    src="{{permoted_item.1.image.url}}"
+                    alt="product image"
                   />
                 </div>
                 <div
                   class="promotion-caption promotion-caption-inverse text-right"
                 >
-                  <h4 class="promotion-title">Apple Watch</h4>
-                  <div class="promotion-price"><small>from</small> $299.00</div>
-                  <p class="promotion-desc">You. At a glance.</p>
-                  <a href="#" class="promotion-btn">View More</a>
+                  <h4 class="promotion-title">{{permoted_item.1.name}}</h4>
+                  <div class="promotion-price"><small>from</small> ${{permoted_item.1.price}}</div>
+                  <p class="promotion-desc">{{permoted_item.1.description}}</p>
+                  <a href="{% url 'product_details' permoted_item.1.id %}" class="promotion-btn">View More</a>
                 </div>
               </div>
               <!-- END promotion -->
@@ -723,15 +722,15 @@
                   class="promotion-image text-center promotion-image-overflow-bottom"
                 >
                   <img
-                    src="{% static 'Html/assets/img/mac-mini.png' %}"
+                    src="{{permoted_item.2.image.url}}"
                     alt=""
                   />
                 </div>
                 <div class="promotion-caption text-center">
-                  <h4 class="promotion-title">Mac Mini</h4>
-                  <div class="promotion-price"><small>from</small> $199.00</div>
-                  <p class="promotion-desc">It’s mini in a massive way.</p>
-                  <a href="#" class="promotion-btn">View More</a>
+                  <h4 class="promotion-title">{{permoted_item.2.name}}</h4>
+                  <div class="promotion-price"><small>from</small> ${{permoted_item.2.price}}</div>
+                  <p class="promotion-desc">{{permoted_item.2.description}}</p>
+                  <a href="{% url 'product_details' permoted_item.2.id %}" class="promotion-btn">View More</a>
                 </div>
               </div>
               <!-- END promotion -->
@@ -745,17 +744,17 @@
                   class="promotion-image promotion-image-overflow-right promotion-image-overflow-bottom text-right"
                 >
                   <img
-                    src="{% static 'Html/assets/img/mac-accessories.png' %}"
+                    src="{{permoted_item.3.image.url}}"
                     alt=""
                   />
                 </div>
                 <div class="promotion-caption text-center">
-                  <h4 class="promotion-title">Apple Accessories</h4>
-                  <div class="promotion-price"><small>from</small> $99.00</div>
+                  <h4 class="promotion-title">{{permoted_item.3.name}}</h4>
+                  <div class="promotion-price"><small>from</small> ${{permoted_item.3.price}}</div>
                   <p class="promotion-desc">
-                    Redesigned. Rechargeable. Remarkable.
+                    {{permoted_item.3.description}}
                   </p>
-                  <a href="#" class="promotion-btn">View More</a>
+                  <a href="{% url 'product_details' permoted_item.3.id %}" class="promotion-btn">View More</a>
                 </div>
               </div>
               <!-- END promotion -->
@@ -763,19 +762,19 @@
               <div class="promotion bg-black">
                 <div class="promotion-image text-right">
                   <img
-                    src="{% static 'Html/assets/img/mac-pro.png' %}"
+                    src="{{permoted_item.4.image.url}}"
                     alt=""
                   />
                 </div>
                 <div class="promotion-caption promotion-caption-inverse">
-                  <h4 class="promotion-title">Mac Pro</h4>
+                  <h4 class="promotion-title">{{permoted_item.4.name}}</h4>
                   <div class="promotion-price">
-                    <small>from</small> $1,299.00
+                    <small>from</small> ${{permoted_item.4.price}}
                   </div>
                   <p class="promotion-desc">
-                    Built for creativity on an epic scale.
+                    {{permoted_item.4.description}}
                   </p>
-                  <a href="#" class="promotion-btn">View More</a>
+                  <a href="{% url 'product_details' permoted_item.4.id %}" class="promotion-btn">View More</a>
                 </div>
               </div>
               <!-- END promotion -->
@@ -812,19 +811,19 @@
             <div class="col-md-2 col-sm-4">
               <!-- BEGIN item -->
               <div class="item item-thumbnail">
-                <a href="{% url 'product_detail' %}" class="item-image">
+                <a href="{% url 'product_details' i.id %}" class="item-image">
                   <img src="{{i.image.url}}" alt="" />
                   <div class="discount">{{i.flat}}% OFF</div>
                 </a>
                 <div class="item-info">
                   <h4 class="item-title">
-                    <a href="{% url 'product_detail' %}"
+                    <a href="{% url 'product_details' i.id %}"
                       >{{i.name}}<br />{{i.storage}}</a
                     >
                   </h4>
                   <p class="item-desc">{{i.description}}</p>
-                  <div class="item-price">{{i.disc_price}}</div>
-                  <div class="item-discount-price">{{i.price}}</div>
+                  <div class="item-price">${{i.disc_price}}</div>
+                  <div class="item-discount-price">${{i.price}}</div>
                 </div>
               </div>
               <!-- END item -->
@@ -857,7 +856,7 @@
                 <li class="list-header">Top Brands</li>
 
                 {% for item in top_brand %}
-                <li><a href="#">{{item.brand.name}}</a></li>
+                <li><a href="#">{{item.brand__name}}</a></li>
                 {% endfor %}
                 <li><a href="#">All Brands</a></li>
               </ul>
@@ -866,7 +865,7 @@
             <!-- BEGIN category-detail -->
             <div class="category-detail">
               <!-- BEGIN category-item -->
-              <a href="#" class="category-item full">
+              <a href="{% url 'product_details' mobile.0.id %}" class="category-item full">
                 <div class="item">
                   <div class="item-cover">
                     <img src="{{mobile.0.image.url}}" alt="user img" />
@@ -889,7 +888,7 @@
                   <!-- BEGIN item -->
                   {% for mobile in mobile|slice:'1:7' %}
                   <div class="item item-thumbnail">
-                    <a href="{% url 'product_detail' %}" class="item-image">
+                    <a href="{% url 'product_details' mobile.id %}" class="item-image">
                       <img src="{{mobile.image.url}}" alt="" />
                       {% if mobile.flat %}
                       <div class="discount">{{mobile.flat}}% OFF</div>
@@ -897,7 +896,7 @@
                     </a>
                     <div class="item-info">
                       <h4 class="item-title">
-                        <a href="{% url 'product_detail' %}"
+                        <a href="{% url 'product_details' mobile.id %}"
                           >{{mobile.name}}<br />{{mobile.storage}}</a
                         >
                       </h4>
@@ -941,7 +940,7 @@
               <ul class="category-list">
                 <li class="list-header">Top Categories</li>
                 {% for tablet in top_tablet_brand %}
-                <li><a href="#">{{tablet.brand.name}}</a></li>
+                <li><a href="#">{{tablet.brand__name}}</a></li>
                 {% endfor %}
                 <li><a href="#">All Brands</a></li>
               </ul>
@@ -950,7 +949,7 @@
             <!-- BEGIN category-detail -->
             <div class="category-detail">
               <!-- BEGIN category-item -->
-              <a href="#" class="category-item full">
+              <a href="{% url 'product_details' tablet.0.id %}" class="category-item full">
                 <div class="item">
                   <div class="item-cover">
                     <img src="{{tablet.0.image.url}}" alt="" />
@@ -970,13 +969,13 @@
                 <div class="item-row">
                   <!-- BEGIN item -->
                   <div class="item item-thumbnail">
-                    <a href="{% url 'product_detail' %}" class="item-image">
+                    <a href="{% url 'product_details' tablet.id %}" class="item-image">
                       <img src="{{tablet.image.url}}" alt="" />
                       <div class="discount">{{tablet.flat}}% OFF</div>
                     </a>
                     <div class="item-info">
                       <h4 class="item-title">
-                        <a href="{% url 'product_detail' %}"
+                        <a href="{% url 'product_details' tablet.id %}"
                           >{{tablet.name}}<br />{{tablet.storage}}</a
                         >
                       </h4>

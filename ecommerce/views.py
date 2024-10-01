@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 from .models import *
@@ -44,6 +44,10 @@ def my_account(request):
 
 def product_detail(request):
  return render(request, 'product_detail.html')
+
+def product_details(request,pro_id):
+ product=get_object_or_404(products,id=pro_id)
+ return render(request, 'product_detail.html',{'product_details':product})
 
 def search_results(request):
  return render(request, 'search_results.html')

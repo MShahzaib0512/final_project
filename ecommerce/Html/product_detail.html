@@ -327,7 +327,7 @@
                             <!-- END product-thumbnail -->
                             <!-- BEGIN product-main-image -->
                             <div class="product-main-image" data-id="main-image">
-                                <img src="{% static 'Html/assets/img/iphone-6s-plus.png' %}" alt="" />
+                                <img src="{{product_details.image.url}}" alt="" />
                             </div>
                             <!-- END product-main-image -->
                         </div>
@@ -336,7 +336,11 @@
                         <div class="product-info">
                             <!-- BEGIN product-info-header -->
                             <div class="product-info-header">
-                                <h1 class="product-title"><span class="label label-success">41% OFF</span> Apple iPhone 6S Plus (16GB) Silver - #89270182 </h1>
+                                {% if product_details.flat %}
+                                <h1 class="product-title"><span class="label label-success">{{product_details.flat}}% OFF</span>{{product_details.name}}</h1>
+                                {% else %}
+                                <h1 class="product-title">{{product_details.name}}</h1>
+                                {% endif %}
                                 <ul class="product-category">
                                     <li><a href="#">iPhone</a></li>
                                     <li>/</li>
@@ -377,14 +381,20 @@
                             </div>
                             <!-- END product-social -->
                             <!-- BEGIN product-purchase-container -->
-                            <div class="product-purchase-container">
+                            <div class="product-purchase-container">                                
+                                {% if product_details.disc_price %}                                    
                                 <div class="product-discount">
-                                    <span class="discount">$869.00</span>
+                                    <span class="discount">${{product_details.price}}</span>
                                 </div>
                                 <div class="product-price">
-                                    <div class="price">$749.00</div>
+                                    <div class="price">${{product_details.disc_price}}</div>
                                 </div>
-                                <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>
+                                {% else %}
+                                 <div class="product-price">
+                                    <div class="price">${{product_details.price}}</div>
+                                 </div>
+                                 {% endif %}                                   
+                                <a class="btn btn-inverse btn-lg" href="{% url 'add_to_cart' product_details.id %}">ADD TO CART</a>
                             </div>
                             <!-- END product-purchase-container -->
                         </div>

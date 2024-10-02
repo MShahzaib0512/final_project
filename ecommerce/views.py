@@ -8,51 +8,76 @@ from django.contrib import messages
 @fetch_data
 def index(request,context):
   return render(request,'index.html',context)
+@all_views_data
+def product(request,context):
+ return render(request,'product.html',context)
+def pro_products(request,pro_name):
+ if pro_name=='All_Mobiles':
+  product=products.objects.filter(category__name='Mobile')
+ elif pro_name=='All_tablets':
+   product=products.objects.filter(category__name='Tablet')
+ else:
+  product=products.objects.filter(brand__name=pro_name,category__name='Mobile')
+  
+ return render(request,'product.html',{'catogery_products':product})
+@all_views_data
+def about_us(request,context):
+ return render(request,'about_us.html',context)
+@all_views_data
+def faq(request,context):
+ return render(request ,'faq.html',context)
+@all_views_data
+def checkout_cart(request,context):
+ return render(request, 'checkout_cart.html',context)
+@all_views_data
+def checkout_complete(request,context):
+ return render(request, 'checkout_complete.html',context)
+@all_views_data
+def checkout_info(request,context):
+ return render(request, 'checkout_info.html',context)
+@all_views_data
+def checkout_payment(request,context):
+ return render(request, 'checkout_payment.html',context)
+@all_views_data
+def contact_us(request,context):
+ return render(request, 'contact_us.html',context)
+@fetch_data
+def index_fixed_header(request,context):
+ return render(request, 'index_fixed_header.html',context)
+@fetch_data
+def index_inverse_header(request,context):
+ return render(request, 'index_inverse_header.html',context)
+@all_views_data
+def my_account(request,context):
+ return render(request, 'my_account.html',context)
+@all_views_data
+def product_detail(request,context):
+ return render(request, 'product_detail.html',context)
 
-def product(request):
- return render(request,'product.html')
+def product_details(request, pro_id):
+    user = request.user
+    total_cart_items = cart.objects.filter(user_id=user.id).count()
+    Cart = cart.objects.filter(user_id=user.id).select_related('pro_id')
+    category_items = category.objects.all()
+    brand_img = brand.objects.all()
+    product = get_object_or_404(products, id=pro_id)
+    context = {
+            'user': user,
+            'category': category_items,
+            'Brands': brand_img,
+            'total_cart_items': total_cart_items,
+            'cart': Cart,
+            'product_details':product
+        }
+    
+    
+    return render(request, 'product_detail.html', context)
 
-def about_us(request):
- return render(request,'about_us.html')
-
-def faq(request):
- return render(request ,'faq.html')
-
-def checkout_cart(request):
- return render(request, 'checkout_cart.html')
-
-def checkout_complete(request):
- return render(request, 'checkout_complete.html')
-
-def checkout_info(request):
- return render(request, 'checkout_info.html')
-
-def checkout_payment(request):
- return render(request, 'checkout_payment.html')
-
-def contact_us(request):
- return render(request, 'contact_us.html')
-
-def index_fixed_header(request):
- return render(request, 'index_fixed_header.html')
-
-def index_inverse_header(request):
- return render(request, 'index_inverse_header.html')
-
-def my_account(request):
- return render(request, 'my_account.html')
-
-def product_detail(request):
- return render(request, 'product_detail.html')
-
-def product_details(request,pro_id):
- product=get_object_or_404(products,id=pro_id)
- return render(request, 'product_detail.html',{'product_details':product})
-
-def search_results(request):
- return render(request, 'search_results.html')
-
-def loginuser(request):
+@all_views_data
+def search_results(request,context):
+ return render(request, 'search_results.html',context)
+@all_views_data
+def loginuser(request,context):
  if request.method=='POST':
   uname = request.POST['uname']
   passw = request.POST['passw']
@@ -62,9 +87,9 @@ def loginuser(request):
    auth_login(request,user)
    return redirect('index')
   
- return render(request,'login.html')
-
-def register(request):
+ return render(request,'login.html',context)
+@all_views_data
+def register(request,context):
  if request.method=='POST':
   uname = request.POST['uname']
   fname = request.POST['fname']
@@ -84,7 +109,7 @@ def register(request):
     profile_img.image = request.FILES['image']
     profile_img.save()
   return redirect('loginuser')
- return render(request,'register.html')
+ return render(request,'register.html',context)
 
 def logoutuser(request):
  auth_logout(request)

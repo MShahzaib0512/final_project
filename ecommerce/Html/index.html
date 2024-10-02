@@ -663,7 +663,7 @@
         <div class="container">
           <!-- BEGIN section-title -->
           <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'product' %}" class="pull-right">SHOW ALL</a>
             Exclusive promotions
             <small>from 25 September 2016 - 1 January 2017</small>
           </h4>
@@ -813,7 +813,9 @@
               <div class="item item-thumbnail">
                 <a href="{% url 'product_details' i.id %}" class="item-image">
                   <img src="{{i.image.url}}" alt="" />
+                  {% if i.flat %}
                   <div class="discount">{{i.flat}}% OFF</div>
+                  {% endif %}
                 </a>
                 <div class="item-info">
                   <h4 class="item-title">
@@ -822,8 +824,14 @@
                     >
                   </h4>
                   <p class="item-desc">{{i.description}}</p>
+                  {% if i.disc_price %}
                   <div class="item-price">${{i.disc_price}}</div>
                   <div class="item-discount-price">${{i.price}}</div>
+                  {% else %}
+                  <div class="item-price">${{i.price}}</div>
+                  <div class="item-discount-price">$0</div>
+                  {% endif %}
+
                 </div>
               </div>
               <!-- END item -->
@@ -843,7 +851,7 @@
         <div class="container">
           <!-- BEGIN section-title -->
           <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'product' %}" class="pull-right">SHOW ALL</a>
             Mobile Phones
             <small>Shop and get your favourite phone at amazing prices!</small>
           </h4>
@@ -856,9 +864,9 @@
                 <li class="list-header">Top Brands</li>
 
                 {% for item in top_brand %}
-                <li><a href="#">{{item.brand__name}}</a></li>
+                <li><a href="{% url 'pro_products' item.brand__name %}">{{item.brand__name}}</a></li>
                 {% endfor %}
-                <li><a href="#">All Brands</a></li>
+                <li><a href="{% url 'pro_products' 'All_Mobiles' %}">All Brands</a></li>
               </ul>
             </div>
             <!-- END category-sidebar -->
@@ -901,9 +909,13 @@
                         >
                       </h4>
                       <p class="item-desc">{{mobile.description}}</p>
-                      
+                      {% if mobile.disc_price %}
                       <div class="item-price">${{mobile.disc_price}}</div>
                       <div class="item-discount-price">${{mobile.price}}</div>
+                      {% else %}
+                      <div class="item-price">${{mobile.price}}</div>
+                      <div class="item-discount-price">$0</div>
+                      {% endif %}
                     </div>
                   </div>
                   {% endfor %}
@@ -928,7 +940,7 @@
         <div class="container">
           <!-- BEGIN section-title -->
           <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'pro_products' 'All_tablets ' %}" class="pull-right">SHOW ALL</a>
             Tablet
             <small>Shop and get your favourite tablet at amazing prices!</small>
           </h4>
@@ -938,11 +950,11 @@
             <!-- BEGIN category-sidebar -->
             <div class="category-sidebar">
               <ul class="category-list">
-                <li class="list-header">Top Categories</li>
-                {% for tablet in top_tablet_brand %}
-                <li><a href="#">{{tablet.brand__name}}</a></li>
+                <li class="list-header">Top Brands</li>
+                {% for tablet in top_tablet_products %}
+                <li><a href="{% url 'pro_products' tablet.brand__name %}">{{tablet.brand__name}}</a></li>
                 {% endfor %}
-                <li><a href="#">All Brands</a></li>
+                <li><a href="{% url 'pro_products' 'All_tablets' %}">All Brands</a></li>
               </ul>
             </div>
             <!-- END category-sidebar -->

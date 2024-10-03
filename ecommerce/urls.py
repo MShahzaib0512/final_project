@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
  path('',views.index, name='index'),
  path('product',views.product, name='product'),
- path('pro_products/<str:pro_name>',views.pro_products, name='pro_products'),
+ path('pro_products/<str:pro_name>/<str:cname>',views.pro_products, name='pro_products'),
  path('about_us',views.about_us, name='about_us'),
  path('faq',views.faq, name='faq'),
  path('checkout_cart',views.checkout_cart, name='checkout_cart'),
@@ -15,7 +15,7 @@ urlpatterns = [
  path('index_fixed_header',views.index_fixed_header, name='index_fixed_header'),
  path('index_inverse_header',views.index_inverse_header, name='index_inverse_header'),
  path('my_account',views.my_account, name='my_account'),
- path('product_detail',views.product_detail, name='product_detail'),
+ # path('product_detail',views.product_detail, name='product_detail'),
  path('product_details/<int:pro_id>',views.product_details, name='product_details'),
  path('search_results',views.search_results, name='search_results'),
  path('loginuser',views.loginuser, name='loginuser'),

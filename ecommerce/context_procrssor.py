@@ -1,11 +1,8 @@
-from functools import wraps
-from django.core.paginator import Paginator
 from .models import *
+from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 
-def fetch_data(view_func):
-    @wraps(view_func)
-    def wrapper(request, *args, **kwargs):
+def Fetch_data(request):
         # Fetch your data
         user=request.user
         category_items = category.objects.all()
@@ -23,7 +20,7 @@ def fetch_data(view_func):
         Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
         permoted_items=products.objects.filter(permoted_item=True)
         # Create context
-        context = {
+        return {
             'user':user,
             'category': category_items,
             'Brands': brand_img,
@@ -37,32 +34,3 @@ def fetch_data(view_func):
             'cart':Cart,
             'permoted_item':permoted_items,
         }
-        
-        # Call the view function and pass the context
-        return view_func(request, context, *args, **kwargs)
-    
-    return wrapper
- 
-from functools import wraps
-
-def all_views_data(view_func):
-    @wraps(view_func)
-    def wrapper(request, *args, **kwargs):
-        user = request.user
-        total_cart_items = cart.objects.filter(user_id=user.id).count()
-        Cart = cart.objects.filter(user_id=user.id).select_related('pro_id')
-        category_items = category.objects.all()
-        brand_img = brand.objects.all()
-        
-        context = {
-            'user': user,
-            'category': category_items,
-            'Brands': brand_img,
-            'total_cart_items': total_cart_items,
-            'cart': Cart,
-        }
-
-        # Pass context as a keyword argument
-        return view_func(request, context=context, *args, **kwargs)
-    
-    return wrapper

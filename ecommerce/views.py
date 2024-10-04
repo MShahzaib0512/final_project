@@ -7,23 +7,39 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-  return render(request,'index.html')
+  nav_trending=products.objects.filter(trending=True)
+  return render(request,'index.html',{'nav_trending':nav_trending})
 
 def product(request,):
  return render(request,'product.html',)
+
+
 def pro_products(request,pro_name,cname):
  if pro_name=='All_Mobiles':
   product=products.objects.filter(category__name='Mobile')
+  all='All Mobile'
+  count=product.count()
+  return render(request,'product.html',{'catogery_products':product,'count':count,'all':all})
  elif pro_name=='All_tablets':
   product=products.objects.filter(category__name='Tablet')
+  count=product.count()
+  all='All Tablet'
+  return render(request,'product.html',{'catogery_products':product,'count':count ,'all':all})
  elif cname=='All':
   product=products.objects.filter(brand__name=pro_name)
+  count=product.count()
+  all='All'
+  return render(request,'product.html',{'catogery_products':product,'count':count ,'all':all})
  elif pro_name=='All':
   product=products.objects.filter(category__name=cname)
+  count=product.count()
+  all='All'
+  return render(request,'product.html',{'catogery_products':product,'count':count ,'all':all})
  else:
   product=products.objects.filter(brand__name=pro_name,category__name=cname)
+  count=product.count()
   
- return render(request,'product.html',{'catogery_products':product})
+ return render(request,'product.html',{'catogery_products':product,'count':count})
 
 def about_us(request,):
  return render(request,'about_us.html',)
@@ -32,7 +48,10 @@ def faq(request,):
  return render(request ,'faq.html',)
 
 def checkout_cart(request,):
- return render(request, 'checkout_cart.html',)
+  user=request.user
+  Cart=cart.objects.filter(user_id=user.id)
+  print(Cart)
+  return render(request, 'checkout_cart.html',{'cart':Cart})
 
 def checkout_complete(request,):
  return render(request, 'checkout_complete.html',)
@@ -62,7 +81,15 @@ def product_details(request, pro_id):
     category_items = category.objects.all()
     brand_img = brand.objects.all()
     product = get_object_or_404(products, id=pro_id)
-    context = {'product_details':product}
+    context = {
+            'user': user,
+            'category': category_items,
+            'Brands': brand_img,
+            'total_cart_items': total_cart_items,
+            'cart': Cart,
+            'product_details':product
+        }
+    
     
     return render(request, 'product_detail.html', context)
 

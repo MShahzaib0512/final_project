@@ -43,3 +43,7 @@ class cart(models.Model):
   pro_id=models.ForeignKey("products",on_delete=models.CASCADE)
   quantity=models.PositiveIntegerField(default=1)
   
+  @property
+  def total_price(self):
+    return self.pro_id.price * self.quantity
+  

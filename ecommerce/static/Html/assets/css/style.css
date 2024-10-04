@@ -3237,6 +3237,7 @@ label {
     list-style-type: none;
     margin: 0 0 15px;
     padding: 0;
+    display: flex;
 }
 .dropdown-menu-list > li > a {
     display: block;

@@ -467,9 +467,15 @@
                                                 </div>
                                                 <div class="qty-desc">1 to max order</div>
                                             </td>
+                                            {% if item.pro_id.disc_price %}
+                                            <td class="cart-total text-center" id="total-{{ item.id }}">
+                                                $<span>{{item.pro_id.disc_price}}</span>
+                                            </td>
+                                            {% else %}
                                             <td class="cart-total text-center" id="total-{{ item.id }}">
                                                 $<span>{{item.pro_id.price}}</span>
                                             </td>
+                                            {% endif %}
                                         </tr>
                                         {% endfor %}
 

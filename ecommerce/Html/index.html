@@ -188,7 +188,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     {% for i in Brands %}
-                    <li><a href="{% url 'product' %}">{{i.name}}</a></li>
+                    <li><a href="{% url 'pro_products' i.name 'All' %}">{{i.name}}</a></li>
                     {% endfor %}
                   </ul>
                 </li>

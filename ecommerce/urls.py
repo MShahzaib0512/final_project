@@ -23,4 +23,8 @@ urlpatterns = [
  path('logoutuser',views.logoutuser, name='logoutuser'),
  path('add_to_cart/<int:product_id>',views.add_to_cart,name='add_to_cart'),
  path('remove_cart_item/<int:product_id>',views.remove_cart_item,name='remove_cart_item'),
+ path('ammount/<str:qty>/<int:item_id>',views.ammount,name='ammount'),
+ path('Shipping/<int:grand_total>',views.Shipping,name='Shipping'),
+ path('pay/<int:grand_total>',views.pay,name='pay'),
+ path('checkout_payments/<int:grand_total>',views.checkout_payments,name='checkout_payments'),
 ]

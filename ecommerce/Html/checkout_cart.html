@@ -38,18 +38,34 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown dropdown-hover">
                             <a href="#" data-toggle="dropdown"><img src="{% static 'Html/assets/img/english.png' %}"
-                                    class="flag-img" alt="" /> English <i class="fa fa-angle-down"></i></a>
+                                    class="flag-img" alt="" />
+                                English <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><img src="{% static 'Html/assets/img/english.png' %}" class="flag-img"
-                                            alt="" /> English</a></li>
-                                <li><a href="#"><img src="{% static 'Html/assets/img/german.png' %}" class="flag-img"
-                                            alt="" /> German</a></li>
-                                <li><a href="#"><img src="{% static 'Html/assets/img/spanish.png' %}" class="flag-img"
-                                            alt="" /> Spanish</a></li>
-                                <li><a href="#"><img src="{% static 'Html/assets/img/french.png' %}" class="flag-img"
-                                            alt="" /> French</a></li>
-                                <li><a href="#"><img src="{% static 'Html/assets/img/chinese.png' %}" class="flag-img"
-                                            alt="" /> Chinese</a></li>
+                                <li>
+                                    <a href="#"><img src="{% static 'Html/assets/img/english.png' %}" class="flag-img"
+                                            alt="" />
+                                        English</a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="{% static 'Html/assets/img/german.png' %}" class="flag-img"
+                                            alt="" />
+                                        German</a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="{% static 'Html/assets/img/spanish.png' %}" class="flag-img"
+                                            alt="" />
+                                        Spanish</a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="{% static 'Html/assets/img/french.png' %}" class="flag-img"
+                                            alt="" />
+                                        French</a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="{% static 'Html/assets/img/chinese.png' %}" class="flag-img"
+                                            alt="" />
+                                        Chinese</a>
+                                </li>
                             </ul>
                         </li>
                         <li><a href="#">Customer Care</a></li>
@@ -59,11 +75,21 @@
                         <li><a href="#">Career</a></li>
                         <li><a href="#">Our Forum</a></li>
                         <li><a href="#">Newsletter</a></li>
-                        <li><a href="#"><i class="fa fa-facebook f-s-14"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter f-s-14"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram f-s-14"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble f-s-14"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus f-s-14"></i></a></li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook f-s-14"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter f-s-14"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram f-s-14"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble f-s-14"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-google-plus f-s-14"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -96,7 +122,7 @@
                     <!-- END navbar-header -->
                     <!-- BEGIN header-nav -->
                     <div class="header-nav">
-                        <div class=" collapse navbar-collapse" id="navbar-collapse">
+                        <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav">
                                 <li class="active"><a href="{% url 'index' %}">Home</a></li>
                                 <li class="dropdown dropdown-full-width dropdown-hover">
@@ -114,8 +140,10 @@
                                                 <h4 class="title">Shop By Categories</h4>
                                                 <ul class="dropdown-menu-list">
                                                     {% for catogery in category %}
-                                                    <li><a href="{% url 'product' %}">{{catogery.name}}<i
-                                                                class="fa fa-angle-right pull-right"></i></a></li>
+                                                    <li>
+                                                        <a href="{% url 'pro_products' 'All' catogery.name %}">{{catogery.name}}<i
+                                                                class="fa fa-angle-right pull-right"></i></a>
+                                                    </li>
                                                     {% endfor %}
                                                 </ul>
                                             </div>
@@ -124,91 +152,37 @@
                                             <div class="dropdown-menu-content">
                                                 <h4 class="title">Shop By Popular Phone</h4>
                                                 <div class="row">
-                                                    <div class="col-md-3">
-                                                        <ul class="dropdown-menu-list">
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    iPhone 7</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    iPhone 6s</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    iPhone 6</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    iPhone 5s</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    iPhone 5</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <ul class="dropdown-menu-list">
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Galaxy S7</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Galaxy A9</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Galaxy J3</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Galaxy Note 5</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Galaxy S7</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <ul class="dropdown-menu-list">
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Lumia 730</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Lumia 735</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Lumia 830</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Lumia 820</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Lumia Icon</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <ul class="dropdown-menu-list">
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Xperia X</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Xperia Z5</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Xperia M5</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Xperia C5</a></li>
-                                                            <li><a href=""><i
-                                                                        class="fa fa-fw fa-angle-right text-muted"></i>
-                                                                    Xperia C4</a></li>
-                                                        </ul>
-                                                    </div>
+                                                    {% for phone in nav_trending %}
+                                                    {% if forloop.counter|divisibleby:5 and not forloop.first %}
                                                 </div>
+                                                <div class="row">
+                                                    <!-- Close current row and start a new one after every 5 items -->
+                                                    {% endif %}
+                                                    <div class="col-md-3">
+                                                        <!-- Each phone will take up 1/4 of the row -->
+                                                        <ul class="dropdown-menu-list">
+                                                            <li>
+                                                                <a href="{% url 'product_details' phone.id %}">
+                                                                    <i class="fa fa-fw fa-angle-right text-muted"></i>
+                                                                    {{ phone.name }}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+
                                                 <h4 class="title">Shop By Brand</h4>
                                                 <ul class="dropdown-brand-list m-b-0">
                                                     {% for brand in Brands %}
-                                                    <li><a href="{% url 'product' %}"><img src="{{brand.image.url}}"
-                                                                alt="" /></a></li>
+                                                    <li>
+                                                        <a href="{% url 'pro_products' brand.name 'All' %}"><img
+                                                                src="{{ brand.image.url }}" alt="" /></a>
+                                                    </li>
                                                     {% endfor %}
                                                 </ul>
                                             </div>
+
                                             <!-- END dropdown-menu-content -->
                                         </div>
                                         <!-- END dropdown-menu-container -->
@@ -223,7 +197,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         {% for i in Brands %}
-                                        <li><a href="{% url 'product' %}">{{i.name}}</a></li>
+                                        <li><a href="{% url 'pro_products' i.name 'All' %}">{{i.name}}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </li>
@@ -236,15 +210,31 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{% url 'index' %}">Home (Default)</a></li>
-                                        <li><a href="{% url 'index_fixed_header' %}">Home (Fixed Header)</a></li>
-                                        <li><a href="{% url 'index_inverse_header' %}">Home (Inverse Header)</a></li>
-                                        <li><a href="{% url 'search_results' %}">Search Results</a></li>
+                                        <li>
+                                            <a href="{% url 'index_fixed_header' %}">Home (Fixed Header)</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'index_inverse_header' %}">Home (Inverse Header)</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'search_results' %}">Search Results</a>
+                                        </li>
                                         <li><a href="{% url 'product' %}">Product Page</a></li>
-                                        <li><a href="">Product Details Page</a></li>
-                                        <li><a href="{% url 'checkout_cart' %}">Checkout Cart</a></li>
-                                        <li><a href="{% url 'checkout_info' %}">Checkout Shipping</a></li>
-                                        <li><a href="{% url 'checkout_payment' %}">Checkout Payment</a></li>
-                                        <li><a href="{% url 'checkout_complete' %}">Checkout Complete</a></li>
+                                        <li>
+                                            <a href="">Product Details Page</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'checkout_cart' %}">Checkout Cart</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'checkout_info' %}">Checkout Shipping</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'checkout_payment' %}">Checkout Payment</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'checkout_complete' %}">Checkout Complete</a>
+                                        </li>
                                         <li><a href="{% url 'my_account' %}">My Account</a></li>
                                         <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
                                         <li><a href="{% url 'about_us' %}">About Us</a></li>
@@ -262,8 +252,9 @@
                                                 <input type="text" placeholder="Search"
                                                     class="form-control bg-silver-lighter" />
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-inverse" type="submit"><i
-                                                            class="fa fa-search"></i></button>
+                                                    <button class="btn btn-inverse" type="submit">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
                                                 </span>
                                             </div>
                                         </form>
@@ -285,17 +276,18 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-cart p-0">
                                     <div class="cart-header">
-                                        <h4 class="cart-title">Shopping Bag (1) </h4>
+                                        <h4 class="cart-title">Shopping Bag (1)</h4>
                                     </div>
                                     <div class="cart-body">
                                         <ul class="cart-item">
                                             {% for item in cart %}
                                             <li>
-                                                <div class="cart-item-image"><img src="{{item.pro_id.image.url}}"
-                                                        alt="" /></div>
+                                                <div class="cart-item-image">
+                                                    <img src="{{item.pro_id.image.url}}" alt="" />
+                                                </div>
                                                 <div class="cart-item-info">
                                                     <h4>{{item.pro_id.name}}</h4>
-                                                    {% if disc_price != 0 %}
+                                                    {% if item.disc_price %}
                                                     <p class="price">${{item.pro_id.disc_price}}</p>
                                                     {% else %}
                                                     <p class="price">${{item.pro_id.price}}</p>
@@ -323,8 +315,7 @@
                                     </div>
                                 </div>
                             </li>
-                            {% endif %}
-                            {% if user.is_authenticated %}
+                            {% endif %} {% if user.is_authenticated %}
                             <li class="divider"></li>
                             <li>
                                 <a href="{% url 'logoutuser' %}">
@@ -454,37 +445,44 @@
                                             {% endif %}
                                             <td class="cart-qty text-center">
                                                 <div class="cart-qty-input">
-                                                    <a href="#" class="qty-control left"
-                                                        onclick="changeQty(event, '{{ item.id }}', -1)">
+                                                    <a href="{% url 'ammount' 'decrease' item.id %}"
+                                                        class="qty-control left">
                                                         <i class="fa fa-minus"></i>
                                                     </a>
-                                                    <input type="text" name="qty" value="1"
-                                                        class="form-control qty-input" id="qty-{{ item.id }}" />
-                                                    <a href="#" class="qty-control right"
-                                                        onclick="changeQty(event, '{{ item.id }}', 1)">
+                                                    <input type="text" name="qty" value="{{ item.quantity }}"
+                                                        class="form-control qty-input" readonly />
+                                                    <a href="{% url 'ammount' 'increase' item.id %}"
+                                                        class="qty-control right">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </div>
                                                 <div class="qty-desc">1 to max order</div>
                                             </td>
-                                            {% if item.pro_id.disc_price %}
                                             <td class="cart-total text-center" id="total-{{ item.id }}">
-                                                $<span>{{item.pro_id.disc_price}}</span>
+                                                {% if item.total %}
+                                                $<span>
+                                                    {{item.total}}
+                                                </span>
+                                                {% elif item.pro_id.disc_price %}
+                                                $<span>
+                                                    {{item.disc_price}}
+                                                </span>
+                                                {% else %}
+                                                $<span>
+                                                    {{item.price}}
+                                                </span>
+                                                {% endif %}
                                             </td>
-                                            {% else %}
-                                            <td class="cart-total text-center" id="total-{{ item.id }}">
-                                                $<span>{{item.pro_id.price}}</span>
-                                            </td>
-                                            {% endif %}
                                         </tr>
                                         {% endfor %}
+
 
                                         <tr>
                                             <td class="cart-summary" colspan="4">
                                                 <div class="summary-container">
                                                     <div class="summary-row">
                                                         <div class="field">Cart Subtotal</div>
-                                                        <div class="value">$999.00</div>
+                                                        <div class="value">${{grand_total}}</div>
                                                     </div>
                                                     <div class="summary-row text-danger">
                                                         <div class="field">Free Shipping</div>
@@ -492,7 +490,7 @@
                                                     </div>
                                                     <div class="summary-row total">
                                                         <div class="field">Total</div>
-                                                        <div class="value" id="grand-total">$999.00</div>
+                                                        <div class="value" id="grand-total">${{grand_total}}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -504,8 +502,9 @@
                         <!-- END checkout-body -->
                         <!-- BEGIN checkout-footer -->
                         <div class="checkout-footer">
-                            <a href="#" class="btn btn-white btn-lg pull-left">Continue Shopping</a>
-                            <button type="submit" class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10">Checkout</button>
+                            <a href="{% url 'index' %}" class="btn btn-white btn-lg pull-left">Continue Shopping</a>
+                            <a href="{% url 'Shipping' grand_total %}"
+                                class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10">Checkout</a>
                         </div>
                         <!-- END checkout-footer -->
                     </form>
@@ -728,56 +727,6 @@
         $(document).ready(function () {
             App.init();
         });
-        function changeQty(event, itemId, change) {
-            event.preventDefault();
-
-            // Get the quantity input and total price elements
-            const qtyInput = document.getElementById(`qty-${itemId}`);
-            const totalPriceElement = document.getElementById(`total-${itemId}`);
-            const cartPriceElement = totalPriceElement.closest('tr').querySelector('.cart-price');
-
-            // Get the current quantity and price
-            let currentQty = parseInt(qtyInput.value);
-            const pricePerUnit = parseFloat(cartPriceElement.getAttribute('data-price'));
-
-            // Update quantity
-            currentQty += change;
-
-            // Ensure quantity doesn't go below 1
-            if (currentQty < 1) {
-                currentQty = 1;
-            }
-
-            // Update the input field
-            qtyInput.value = currentQty;
-
-            // Calculate new total price
-            const newTotalPrice = (pricePerUnit * currentQty).toFixed(2);
-            // Update the total price displayed
-            totalPriceElement.querySelector('span').textContent = newTotalPrice;
-
-            // Calculate the overall total for the cart
-            calculateCartTotal();
-        }
-
-        function calculateCartTotal() {
-            // Get all total price elements
-            const totalElements = document.querySelectorAll('.cart-total span');
-            let grandTotal = 0;
-
-            totalElements.forEach(totalElement => {
-                grandTotal += parseFloat(totalElement.textContent);
-            });
-
-            // Set the total in the grand total div
-            const grandTotalElement = document.getElementById('grand-total');
-            grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
-
-            // Optional: log the total
-            console.log(`Total Cart Price: $${grandTotal.toFixed(2)}`);
-        }
-
-
     </script>
 </body>
 

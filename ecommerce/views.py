@@ -2,17 +2,17 @@ from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 from .models import *
-from .decorator import *
 from django.contrib import messages
+from django.conf import settings
+import stripe
 # Create your views here.
-
+stripe.api_key = settings.STRIPE_TEST_PUBLIC_KEY
 def index(request):
   nav_trending=products.objects.filter(trending=True)
   return render(request,'index.html',{'nav_trending':nav_trending})
 
-def product(request,):
+def product(request):
  return render(request,'product.html',)
-
 
 def pro_products(request,pro_name,cname):
  if pro_name=='All_Mobiles':
@@ -28,12 +28,12 @@ def pro_products(request,pro_name,cname):
  elif cname=='All':
   product=products.objects.filter(brand__name=pro_name)
   count=product.count()
-  all='All'
+  all=pro_name
   return render(request,'product.html',{'catogery_products':product,'count':count ,'all':all})
  elif pro_name=='All':
   product=products.objects.filter(category__name=cname)
   count=product.count()
-  all='All'
+  all=cname
   return render(request,'product.html',{'catogery_products':product,'count':count ,'all':all})
  else:
   product=products.objects.filter(brand__name=pro_name,category__name=cname)
@@ -49,9 +49,9 @@ def faq(request,):
 
 def checkout_cart(request,):
   user=request.user
-  Cart=cart.objects.filter(user_id=user.id)
-  print(Cart)
-  return render(request, 'checkout_cart.html',{'cart':Cart})
+  Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
+  grand_total = sum(item.total for item in Cart)
+  return render(request, 'checkout_cart.html',{'cart':Cart,'grand_total':grand_total})
 
 def checkout_complete(request,):
  return render(request, 'checkout_complete.html',)
@@ -59,9 +59,37 @@ def checkout_complete(request,):
 def checkout_info(request,):
  return render(request, 'checkout_info.html',)
 
+def Shipping(request,grand_total):
+   return render(request, 'checkout_info.html',{'grand_total':grand_total,'STRIPE_PUBLIC_KEY':stripe.api_key})
+ 
 def checkout_payment(request,):
- return render(request, 'checkout_payment.html',)
+  return render (request,'checkout_payment.html')
 
+def checkout_payments(request,grand_total):
+  return render (request,'checkout_payment.html',{'grand_total':grand_total})
+
+def pay(request, grand_total):
+    
+
+    if request.method == 'POST':
+        token = request.POST.get('stripeToken')
+        payment_type = request.POST.get('payment_type')  # Get the selected payment type
+        try:
+           charge = stripe.Charge.create(
+                amount=grand_total,
+                currency='usd',
+                description='Payment for {}'.format(payment_type),
+                source=token,  # Ensure this is not None
+            )
+           return redirect('index')  # Redirect on successful payment
+        except stripe.error.StripeError as e:
+            # Log the error if necessary
+            return render(request, 'checkout_payment.html', {'error': 'Payment failed: {}'.format(str(e)), 'grand_total': grand_total})
+
+    return render(request, 'checkout_payment.html', {
+        'stripe_public_key': settings.STRIPE_TEST_PUBLIC_KEY,
+        'grand_total': grand_total
+    })
 def contact_us(request,):
  return render(request, 'contact_us.html',)
 
@@ -153,3 +181,27 @@ def remove_cart_item(request,product_id):
   Cart=cart.objects.filter(pro_id=product_id).select_related('user_id')
   Cart.delete()
   return redirect('index')
+
+def ammount(request, qty, item_id):
+    user = request.user
+    cart_item = cart.objects.filter(user_id=user.id, id=item_id).select_related('pro_id').first()
+
+    if not cart_item:
+        return redirect('checkout_cart')
+
+    if qty == 'increase':
+        cart_item.quantity += 1  
+    elif qty == 'decrease':
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1 
+        else:
+            cart_item.quantity = 1  
+
+    if cart_item.pro_id.disc_price:
+        cart_item.total = cart_item.pro_id.disc_price * cart_item.quantity
+    else:
+        cart_item.total = cart_item.pro_id.price * cart_item.quantity
+
+    cart_item.save()
+    
+    return redirect('checkout_cart')

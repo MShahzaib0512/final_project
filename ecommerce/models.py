@@ -42,8 +42,7 @@ class cart(models.Model):
   user_id=models.ForeignKey(User,on_delete=models.CASCADE)
   pro_id=models.ForeignKey("products",on_delete=models.CASCADE)
   quantity=models.PositiveIntegerField(default=1)
+  total=models.IntegerField(null=True,blank=True,default=0)
+  grand_total=models.IntegerField(null=True,blank=True,default=0)
   
-  @property
-  def total_price(self):
-    return self.pro_id.price * self.quantity
   

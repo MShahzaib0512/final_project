@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 import stripe
 # Create your views here.
-stripe.api_key = settings.STRIPE_TEST_PUBLIC_KEY
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 def index(request):
   nav_trending=products.objects.filter(trending=True)
   return render(request,'index.html',{'nav_trending':nav_trending})
@@ -60,7 +60,7 @@ def checkout_info(request,):
  return render(request, 'checkout_info.html',)
 
 def Shipping(request,grand_total):
-   return render(request, 'checkout_info.html',{'grand_total':grand_total,'STRIPE_PUBLIC_KEY':stripe.api_key})
+   return render(request, 'checkout_info.html',{'grand_total':grand_total,'key':stripe.api_key})
  
 def checkout_payment(request,):
   return render (request,'checkout_payment.html')
@@ -69,22 +69,21 @@ def checkout_payments(request,grand_total):
   return render (request,'checkout_payment.html',{'grand_total':grand_total})
 
 def pay(request, grand_total):
-    
-
     if request.method == 'POST':
         token = request.POST.get('stripeToken')
-        payment_type = request.POST.get('payment_type')  # Get the selected payment type
-        try:
-           charge = stripe.Charge.create(
-                amount=grand_total,
-                currency='usd',
-                description='Payment for {}'.format(payment_type),
-                source=token,  # Ensure this is not None
-            )
-           return redirect('index')  # Redirect on successful payment
-        except stripe.error.StripeError as e:
-            # Log the error if necessary
-            return render(request, 'checkout_payment.html', {'error': 'Payment failed: {}'.format(str(e)), 'grand_total': grand_total})
+        if token:  # Check if token is provided
+            try:
+                charge = stripe.Charge.create(
+                    amount=grand_total*100,
+                    currency='usd',
+                    description='Payment for order',
+                    source=token,
+                )
+                return redirect('checkout_complete')  # Redirect on successful payment
+            except stripe.error.StripeError as e:
+                return render(request, 'checkout_payment.html', {'error': str(e), 'grand_total': grand_total})
+        else:
+            return render(request, 'checkout_payment.html', {'error': 'No token provided', 'grand_total': grand_total})
 
     return render(request, 'checkout_payment.html', {
         'stripe_public_key': settings.STRIPE_TEST_PUBLIC_KEY,

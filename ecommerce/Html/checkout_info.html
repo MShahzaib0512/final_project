@@ -357,7 +357,7 @@
             <div class="container">
                 <!-- BEGIN checkout -->
                 <div class="checkout">
-                    <form action="{% url 'checkout_payment' %}" method="POST" name="form_shipping"
+                    <form action="{% url 'checkout_payments' grand_total %}" method="POST" name="form_shipping"
                         class="form-horizontal">
                         <!-- BEGIN checkout-header -->
                         <div class="checkout-header">
@@ -392,7 +392,7 @@
                                 <!-- BEGIN col-3 -->
                                 <div class="col-md-3 col-sm-3">
                                     <div class="step">
-                                        <a href="{% url 'checkout_payment' %}">
+                                        <a href="{% url 'checkout_payments' grand_total %}">
                                             <div class="number">3</div>
                                             <div class="info">
                                                 <div class="title">Payment</div>

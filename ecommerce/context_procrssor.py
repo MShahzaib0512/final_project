@@ -19,6 +19,7 @@ def Fetch_data(request):
         total_cart_items=cart.objects.filter(user_id=user.id).count()
         Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
         permoted_items=products.objects.filter(permoted_item=True)
+        nav_trending=products.objects.filter(trending=True)
         # Create context
         return {
             'user':user,
@@ -33,4 +34,5 @@ def Fetch_data(request):
             'total_cart_items':total_cart_items,
             'cart':Cart,
             'permoted_item':permoted_items,
+            'nav_trending':nav_trending,
         }

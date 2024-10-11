@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 from .models import *
 from django.contrib import messages
@@ -8,8 +9,7 @@ import stripe
 # Create your views here.
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 def index(request):
-  nav_trending=products.objects.filter(trending=True)
-  return render(request,'index.html',{'nav_trending':nav_trending})
+  return render(request,'index.html')
 
 def product(request):
  return render(request,'product.html',)
@@ -46,28 +46,28 @@ def about_us(request,):
 
 def faq(request,):
  return render(request ,'faq.html',)
-
+@login_required
 def checkout_cart(request,):
   user=request.user
   Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
   grand_total = sum(item.total for item in Cart)
   return render(request, 'checkout_cart.html',{'cart':Cart,'grand_total':grand_total})
-
+@login_required
 def checkout_complete(request,):
  return render(request, 'checkout_complete.html',)
-
+@login_required
 def checkout_info(request,):
  return render(request, 'checkout_info.html',)
-
+@login_required
 def Shipping(request,grand_total):
    return render(request, 'checkout_info.html',{'grand_total':grand_total,'key':stripe.api_key})
- 
+@login_required
 def checkout_payment(request,):
   return render (request,'checkout_payment.html')
-
+@login_required
 def checkout_payments(request,grand_total):
   return render (request,'checkout_payment.html',{'grand_total':grand_total})
-
+@login_required
 def pay(request, grand_total):
     if request.method == 'POST':
         token = request.POST.get('stripeToken')
@@ -79,6 +79,9 @@ def pay(request, grand_total):
                     description='Payment for order',
                     source=token,
                 )
+                
+                Cart=cart.objects.filter(user_id=request.user.id)
+                Cart.delete()
                 return redirect('checkout_complete')  # Redirect on successful payment
             except stripe.error.StripeError as e:
                 return render(request, 'checkout_payment.html', {'error': str(e), 'grand_total': grand_total})
@@ -97,7 +100,7 @@ def index_fixed_header(request,):
 
 def index_inverse_header(request,):
  return render(request, 'index_inverse_header.html',)
-
+@login_required
 def my_account(request,):
  return render(request, 'my_account.html',)
 
@@ -160,7 +163,7 @@ def register(request,):
 def logoutuser(request):
  auth_logout(request)
  return redirect('index')
-
+@login_required
 def add_to_cart(request,product_id):
   user=request.user
   if user.is_authenticated:
@@ -175,12 +178,12 @@ def add_to_cart(request,product_id):
     messages.info(request,"Register yourself to our web to get advance facilities")
     return redirect('register')
   return redirect('index')
-
+@login_required
 def remove_cart_item(request,product_id):
   Cart=cart.objects.filter(pro_id=product_id).select_related('user_id')
   Cart.delete()
   return redirect('index')
-
+@login_required
 def ammount(request, qty, item_id):
     user = request.user
     cart_item = cart.objects.filter(user_id=user.id, id=item_id).select_related('pro_id').first()

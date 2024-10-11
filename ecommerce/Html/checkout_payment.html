@@ -351,21 +351,23 @@
                         class="form-horizontal">
                         {% csrf_token %}
                         <div class="checkout-header">
+                            <!-- BEGIN row -->
                             <div class="row">
-                                <!-- Steps indicators -->
+                                <!-- BEGIN col-3 -->
                                 <div class="col-md-3 col-sm-3">
-                                    <div class="step">
-                                        <a href="{% url 'checkout_cart' %}">
-                                            <div class="number">1</div>
+                                    <div class="step active">
+                                        <a href="#">
+                                            <div class="number">3</div>
                                             <div class="info">
-                                                <div class="title">Delivery Options</div>
-                                                <div class="desc">Lorem ipsum dolor sit amet.</div>
+                                                <div class="title">Payment</div>
+                                                <div class="desc">Curabitur interdum libero.</div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-                                <!-- additional steps here -->
+                                <!-- END col-3 -->
                             </div>
+                            <!-- END row -->
                         </div>
                         <div class="checkout-body">
                             <h4 class="checkout-title">Choose a payment method</h4>
@@ -395,69 +397,6 @@
                         </div>
                     </form>
 
-                    <!-- Stripe JS -->
-                    <script src="https://js.stripe.com/v3/"></script>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Initialize Stripe with your public key
-                            const stripe = Stripe('pk_test_51Q7rnzRpuoXZJx1eM8m7kFKRslf6IiRlTpVqMOEqjtUPJVl1JZmFKr2ewW3nRCRLa5gK16Xflt6p3HLunGRXmJGv00jYvX9LS4');
-
-                            // Create an instance of Elements
-                            const elements = stripe.elements();
-
-                            // Create an instance of the card Element
-                            const cardElement = elements.create('card');
-
-                            // Mount the card element to the DOM
-                            cardElement.mount('#card-element');
-
-                            // Listen for card input changes and display any errors
-                            cardElement.on('change', function (event) {
-                                const displayError = document.getElementById('card-errors');
-                                if (event.error) {
-                                    displayError.textContent = event.error.message;
-                                } else {
-                                    displayError.textContent = '';
-                                }
-                            });
-
-                            // Get the form and listen for form submission
-                            const form = document.getElementById('payment-form');
-                            form.addEventListener('submit', function (event) {
-                                event.preventDefault();
-
-                                // Disable the submit button to prevent multiple clicks
-                                const submitButton = document.getElementById('submit-button');
-                                submitButton.disabled = true;
-                                submitButton.textContent = 'Processing...'; // Update button text while processing
-
-                                // Create Stripe token
-                                stripe.createToken(cardElement).then(function (result) {
-                                    if (result.error) {
-                                        // Show error in the card-errors element
-                                        const displayError = document.getElementById('card-errors');
-                                        displayError.textContent = result.error.message;
-
-                                        // Re-enable the submit button
-                                        submitButton.disabled = false;
-                                        submitButton.textContent = 'Pay'; // Reset button text
-                                    } else {
-                                        // Insert the token into the form and submit
-                                        const hiddenInput = document.getElementById('stripeToken');
-                                        hiddenInput.value = result.token.id;
-
-                                        // Submit the form
-                                        form.submit();
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-
-
-
-
                     <h4 class="checkout-title m-t-30 m-b-15">Payment Frequently Asked Questions</h4>
                     <!-- BEGIN checkout-question-list -->
                     <div class="row checkout-question-list" id="checkout-faq">
@@ -472,25 +411,27 @@
                                 </div>
                                 <div class="answer collapse in" id="checkout-faq-1">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel
-                                    tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus.
-                                    Cras
-                                    erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies,
-                                    gravida ante ut, ultrices nunc.
+                                    tincidunt
+                                    sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat
+                                    nunc,
+                                    pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida
+                                    ante ut,
+                                    ultrices nunc.
                                 </div>
                             </div>
                             <div class="clearfix m-t-10">
                                 <div class="question">
                                     <a href="#checkout-faq-2" class="collapsed" data-toggle="collapse"
                                         data-parent="#checkout-faq">
-                                        <span class="dash">-</span> Can I use a Debit Card to make payment??
+                                        <span class="dash">-</span> Can I use a Debit Card to make payment?
                                     </a>
                                 </div>
                                 <div class="answer collapse in" id="checkout-faq-2">
                                     Curabitur vitae venenatis odio, eget molestie mauris. Nullam vitae turpis at mi
-                                    consequat rutrum quis quis mi. Vestibulum imperdiet neque non libero condimentum,
-                                    quis
-                                    sodales magna molestie. Interdum et malesuada fames ac ante ipsum primis in
-                                    faucibus.
+                                    consequat
+                                    rutrum quis quis mi. Vestibulum imperdiet neque non libero condimentum, quis sodales
+                                    magna
+                                    molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus.
                                 </div>
                             </div>
                             <div class="clearfix m-t-10">
@@ -505,8 +446,8 @@
                                     Cras malesuada mi quis purus pharetra egestas. Curabitur auctor sapien est, eu
                                     porttitor
                                     velit ornare in. Fusce porta suscipit diam at placerat. Donec lobortis iaculis
-                                    accumsan.
-                                    Ut semper felis vel nisi aliquam facilisis.
+                                    accumsan. Ut
+                                    semper felis vel nisi aliquam facilisis.
                                 </div>
                             </div>
                         </div>
@@ -524,8 +465,8 @@
                                     Duis gravida sem eu arcu efficitur, laoreet egestas nibh posuere. Pellentesque
                                     suscipit
                                     tincidunt porttitor. Aliquam vitae massa vel justo lobortis posuere. Nulla tempor
-                                    enim
-                                    at auctor dignissim. Aenean sit amet venenatis odio.
+                                    enim at
+                                    auctor dignissim. Aenean sit amet venenatis odio.
                                 </div>
                             </div>
                             <div class="clearfix m-t-10">
@@ -538,10 +479,10 @@
                                 </div>
                                 <div class="answer collapse in" id="checkout-faq-5">
                                     Nunc consectetur tellus libero, at tempor dolor scelerisque id. Lorem ipsum dolor
-                                    sit
-                                    amet, consectetur adipiscing elit. Nunc feugiat ligula vitae tincidunt sagittis.
-                                    Etiam
-                                    congue ligula purus, ut fringilla ante interdum eu.
+                                    sit amet,
+                                    consectetur adipiscing elit. Nunc feugiat ligula vitae tincidunt sagittis. Etiam
+                                    congue
+                                    ligula purus, ut fringilla ante interdum eu.
                                 </div>
                             </div>
                         </div>
@@ -549,230 +490,288 @@
                     </div>
                     <!-- END checkout-question-list -->
                 </div>
-                <!-- END container -->
+                <!-- END checkout -->
             </div>
-            <!-- END #checkout-payment -->
-
-            <!-- BEGIN #policy -->
-            <div id="policy" class="section-container p-t-30 p-b-30 bg-white">
-                <!-- BEGIN container -->
-                <div class="container">
-                    <!-- BEGIN row -->
-                    <div class="row">
-                        <!-- BEGIN col-4 -->
-                        <div class="col-md-4 col-sm-4">
-                            <!-- BEGIN policy -->
-                            <div class="policy">
-                                <div class="policy-icon"><i class="fa fa-truck"></i></div>
-                                <div class="policy-info">
-                                    <h4>Free Delivery Over $100</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                            <!-- END policy -->
-                        </div>
-                        <!-- END col-4 -->
-                        <!-- BEGIN col-4 -->
-                        <div class="col-md-4 col-sm-4">
-                            <!-- BEGIN policy -->
-                            <div class="policy">
-                                <div class="policy-icon"><i class="fa fa-shield"></i></div>
-                                <div class="policy-info">
-                                    <h4>1 Year Warranty For Phones</h4>
-                                    <p>Cras laoreet urna id dui malesuada gravida. <br />Duis a lobortis dui.</p>
-                                </div>
-                            </div>
-                            <!-- END policy -->
-                        </div>
-                        <!-- END col-4 -->
-                        <!-- BEGIN col-4 -->
-                        <div class="col-md-4 col-sm-4">
-                            <!-- BEGIN policy -->
-                            <div class="policy">
-                                <div class="policy-icon"><i class="fa fa-user-md"></i></div>
-                                <div class="policy-info">
-                                    <h4>6 Month Warranty For Accessories</h4>
-                                    <p>Fusce ut euismod orci. Morbi auctor, sapien non eleifend iaculis.</p>
-                                </div>
-                            </div>
-                            <!-- END policy -->
-                        </div>
-                        <!-- END col-4 -->
-                    </div>
-                    <!-- END row -->
-                </div>
-                <!-- END container -->
-            </div>
-            <!-- END #policy -->
-
-            <!-- BEGIN #footer -->
-            <div id="footer" class="footer">
-                <!-- BEGIN container -->
-                <div class="container">
-                    <!-- BEGIN row -->
-                    <div class="row">
-                        <!-- BEGIN col-3 -->
-                        <div class="col-md-3">
-                            <h4 class="footer-header">ABOUT US</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec tristique dolor, ac
-                                efficitur velit. Nulla lobortis tempus convallis. Nulla aliquam lectus eu porta
-                                pulvinar.
-                                Mauris semper justo erat.
-                            </p>
-                            <p>
-                                Vestibulum porttitor lorem et vestibulum pharetra. Phasellus sit amet mi congue,
-                                hendrerit
-                                mi ut, dignissim eros.
-                            </p>
-                        </div>
-                        <!-- END col-3 -->
-                        <!-- BEGIN col-3 -->
-                        <div class="col-md-3">
-                            <h4 class="footer-header">RELATED LINKS</h4>
-                            <ul class="fa-ul">
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Shopping Help</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Terms of Use</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Contact Us</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Careers</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Payment Method</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sales & Refund</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sitemap</a></li>
-                                <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Privacy & Policy</a></li>
-                            </ul>
-                        </div>
-                        <!-- END col-3 -->
-                        <!-- BEGIN col-3 -->
-                        <div class="col-md-3">
-                            <h4 class="footer-header">LATEST PRODUCT</h4>
-                            <ul class="list-unstyled list-product">
-                                <li>
-                                    <div class="image">
-                                        <img src="{% static 'Html/assets/img/iphone-6s.jpg' %}" alt="" />
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="info-title">Iphone 6s</h4>
-                                        <div class="price">$1200.00</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="image">
-                                        <img src="{% static 'Html/assets/img/galaxy-s6.jpg' %}" alt="" />
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="info-title">Samsung Galaxy s7</h4>
-                                        <div class="price">$850.00</div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="image">
-                                        <img src="{% static 'Html/assets/img/ipad-pro.jpg' %}" alt="" />
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="info-title">Ipad Pro</h4>
-                                        <div class="price">$800.00</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="image">
-                                        <img src="{% static 'Html/assets/img/galaxy-note5.jpg' %}" alt="" />
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="info-title">Samsung Galaxy Note 5</h4>
-                                        <div class="price">$1200.00</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- END col-3 -->
-                        <!-- BEGIN col-3 -->
-                        <div class="col-md-3">
-                            <h4 class="footer-header">OUR CONTACT</h4>
-                            <address>
-                                <strong>Twitter, Inc.</strong><br />
-                                1355 Market Street, Suite 900<br />
-                                San Francisco, CA 94103<br /><br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Fax">Fax:</abbr> (123) 456-7891<br />
-                                <abbr title="Email">Email:</abbr> <a
-                                    href="mailto:sales@myshop.com">sales@myshop.com</a><br />
-                                <abbr title="Skype">Skype:</abbr> <a href="skype:myshop">myshop</a>
-                            </address>
-                        </div>
-                        <!-- END col-3 -->
-                    </div>
-                    <!-- END row -->
-                </div>
-                <!-- END container -->
-            </div>
-            <!-- END #footer -->
-
-            <!-- BEGIN #footer-copyright -->
-            <div id="footer-copyright" class="footer-copyright">
-                <!-- BEGIN container -->
-                <div class="container">
-                    <div class="payment-method">
-                        <img src="{% static 'Html/assets/img/payment_method.png' %}" alt="" />
-                    </div>
-                    <div class="copyright">
-                        Copyright &copy; 2016 SeanTheme. All rights reserved.
-                    </div>
-                </div>
-                <!-- END container -->
-            </div>
-            <!-- END #footer-copyright -->
+            <!-- END container -->
         </div>
-        <!-- END #page-container -->
+        <!-- END #checkout-payment -->
 
-        <!-- begin theme-panel -->
-        <div class="theme-panel">
-            <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i
-                    class="fa fa-cog"></i></a>
-            <div class="theme-panel-content">
-                <ul class="theme-list clearfix">
-                    <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector"
-                            data-toggle="tooltip" data-trigger="hover" data-container="body"
-                            data-title="Purple">&nbsp;</a>
-                    </li>
-                    <li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector"
-                            data-toggle="tooltip" data-trigger="hover" data-container="body"
-                            data-title="Blue">&nbsp;</a>
-                    </li>
-                    <li class="active"><a href="javascript:;" class="bg-green" data-theme="default"
-                            data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body"
-                            data-title="Default">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector"
-                            data-toggle="tooltip" data-trigger="hover" data-container="body"
-                            data-title="Orange">&nbsp;</a>
-                    </li>
-                    <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector"
-                            data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a>
-                    </li>
-                </ul>
+        <!-- BEGIN #policy -->
+        <div id="policy" class="section-container p-t-30 p-b-30 bg-white">
+            <!-- BEGIN container -->
+            <div class="container">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-4 -->
+                    <div class="col-md-4 col-sm-4">
+                        <!-- BEGIN policy -->
+                        <div class="policy">
+                            <div class="policy-icon"><i class="fa fa-truck"></i></div>
+                            <div class="policy-info">
+                                <h4>Free Delivery Over $100</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                        <!-- END policy -->
+                    </div>
+                    <!-- END col-4 -->
+                    <!-- BEGIN col-4 -->
+                    <div class="col-md-4 col-sm-4">
+                        <!-- BEGIN policy -->
+                        <div class="policy">
+                            <div class="policy-icon"><i class="fa fa-shield"></i></div>
+                            <div class="policy-info">
+                                <h4>1 Year Warranty For Phones</h4>
+                                <p>Cras laoreet urna id dui malesuada gravida. <br />Duis a lobortis dui.</p>
+                            </div>
+                        </div>
+                        <!-- END policy -->
+                    </div>
+                    <!-- END col-4 -->
+                    <!-- BEGIN col-4 -->
+                    <div class="col-md-4 col-sm-4">
+                        <!-- BEGIN policy -->
+                        <div class="policy">
+                            <div class="policy-icon"><i class="fa fa-user-md"></i></div>
+                            <div class="policy-info">
+                                <h4>6 Month Warranty For Accessories</h4>
+                                <p>Fusce ut euismod orci. Morbi auctor, sapien non eleifend iaculis.</p>
+                            </div>
+                        </div>
+                        <!-- END policy -->
+                    </div>
+                    <!-- END col-4 -->
+                </div>
+                <!-- END row -->
             </div>
+            <!-- END container -->
         </div>
-        <!-- end theme-panel -->
+        <!-- END #policy -->
 
-        <!-- ================== BEGIN BASE JS ================== -->
-        <script src="{% static 'Html/assets/plugins/jquery/jquery-1.9.1.min.js' %}"></script>
-        <script src="{% static 'Html/assets/plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
-        <script src="{% static 'Html/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!--[if lt IE 9]>
+        <!-- BEGIN #footer -->
+        <div id="footer" class="footer">
+            <!-- BEGIN container -->
+            <div class="container">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-3 -->
+                    <div class="col-md-3">
+                        <h4 class="footer-header">ABOUT US</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec tristique dolor, ac
+                            efficitur velit.
+                            Nulla lobortis tempus convallis. Nulla aliquam lectus eu porta pulvinar. Mauris semper justo
+                            erat.
+                        </p>
+                        <p>Vestibulum porttitor lorem et vestibulum pharetra. Phasellus sit amet mi congue, hendrerit mi
+                            ut,
+                            dignissim
+
+                        <p>
+                            Vestibulum porttitor lorem et vestibulum pharetra. Phasellus sit amet mi congue,
+                            hendrerit
+                            mi ut, dignissim eros.
+                        </p>
+                    </div>
+                    <!-- END col-3 -->
+                    <!-- BEGIN col-3 -->
+                    <div class="col-md-3">
+                        <h4 class="footer-header">RELATED LINKS</h4>
+                        <ul class="fa-ul">
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Shopping Help</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Terms of Use</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Contact Us</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Careers</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Payment Method</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sales & Refund</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sitemap</a></li>
+                            <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Privacy & Policy</a></li>
+                        </ul>
+                    </div>
+                    <!-- END col-3 -->
+                    <!-- BEGIN col-3 -->
+                    <div class="col-md-3">
+                        <h4 class="footer-header">LATEST PRODUCT</h4>
+                        <ul class="list-unstyled list-product">
+                            <li>
+                                <div class="image">
+                                    <img src="{% static 'Html/assets/img/iphone-6s.jpg' %}" alt="" />
+                                </div>
+                                <div class="info">
+                                    <h4 class="info-title">Iphone 6s</h4>
+                                    <div class="price">$1200.00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="image">
+                                    <img src="{% static 'Html/assets/img/galaxy-s6.jpg' %}" alt="" />
+                                </div>
+                                <div class="info">
+                                    <h4 class="info-title">Samsung Galaxy s7</h4>
+                                    <div class="price">$850.00</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="image">
+                                    <img src="{% static 'Html/assets/img/ipad-pro.jpg' %}" alt="" />
+                                </div>
+                                <div class="info">
+                                    <h4 class="info-title">Ipad Pro</h4>
+                                    <div class="price">$800.00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="image">
+                                    <img src="{% static 'Html/assets/img/galaxy-note5.jpg' %}" alt="" />
+                                </div>
+                                <div class="info">
+                                    <h4 class="info-title">Samsung Galaxy Note 5</h4>
+                                    <div class="price">$1200.00</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END col-3 -->
+                    <!-- BEGIN col-3 -->
+                    <div class="col-md-3">
+                        <h4 class="footer-header">OUR CONTACT</h4>
+                        <address>
+                            <strong>Twitter, Inc.</strong><br />
+                            1355 Market Street, Suite 900<br />
+                            San Francisco, CA 94103<br /><br />
+                            <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
+                            <abbr title="Fax">Fax:</abbr> (123) 456-7891<br />
+                            <abbr title="Email">Email:</abbr> <a
+                                href="mailto:sales@myshop.com">sales@myshop.com</a><br />
+                            <abbr title="Skype">Skype:</abbr> <a href="skype:myshop">myshop</a>
+                        </address>
+                    </div>
+                    <!-- END col-3 -->
+                </div>
+                <!-- END row -->
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- END #footer -->
+
+        <!-- BEGIN #footer-copyright -->
+        <div id="footer-copyright" class="footer-copyright">
+            <!-- BEGIN container -->
+            <div class="container">
+                <div class="payment-method">
+                    <img src="{% static 'Html/assets/img/payment_method.png' %}" alt="" />
+                </div>
+                <div class="copyright">
+                    Copyright &copy; 2016 SeanTheme. All rights reserved.
+                </div>
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- END #footer-copyright -->
+    </div>
+    <!-- END #page-container -->
+
+    <!-- begin theme-panel -->
+    <div class="theme-panel">
+        <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
+        <div class="theme-panel-content">
+            <ul class="theme-list clearfix">
+                <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector"
+                        data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a>
+                </li>
+                <li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector"
+                        data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a>
+                </li>
+                <li class="active"><a href="javascript:;" class="bg-green" data-theme="default"
+                        data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body"
+                        data-title="Default">&nbsp;</a></li>
+                <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector"
+                        data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a>
+                </li>
+                <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector"
+                        data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end theme-panel -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="{% static 'Html/assets/plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+    <script src="{% static 'Html/assets/plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+    <script src="{% static 'Html/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--[if lt IE 9]>
 		<script src="assets/crossbrowserjs/html5shiv.js"></script>
 		<script src="assets/crossbrowserjs/respond.min.js"></script>
 		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
-        <script src="{% static 'Html/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
-        <script src="{% static 'Html/assets/js/apps.min.js' %}"></script>
-        <!-- ================== END BASE JS ================== -->
+    <script src="{% static 'Html/assets/plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'Html/assets/js/apps.min.js' %}"></script>
+    <!-- ================== END BASE JS ================== -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Stripe with your public key
+            const stripe = Stripe('pk_test_51Q7rnzRpuoXZJx1eM8m7kFKRslf6IiRlTpVqMOEqjtUPJVl1JZmFKr2ewW3nRCRLa5gK16Xflt6p3HLunGRXmJGv00jYvX9LS4');
 
-        <script>
-            $(document).ready(function () {
-                App.init();
+            // Create an instance of Elements
+            const elements = stripe.elements();
+
+            // Create an instance of the card Element
+            const cardElement = elements.create('card');
+
+            // Mount the card element to the DOM
+            cardElement.mount('#card-element');
+
+            // Listen for card input changes and display any errors
+            cardElement.on('change', function (event) {
+                const displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
+                }
             });
 
-        </script>
+            // Get the form and listen for form submission
+            const form = document.getElementById('payment-form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Disable the submit button to prevent multiple clicks
+                const submitButton = document.getElementById('submit-button');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Processing...'; // Update button text while processing
+
+                // Create Stripe token
+                stripe.createToken(cardElement).then(function (result) {
+                    if (result.error) {
+                        // Show error in the card-errors element
+                        const displayError = document.getElementById('card-errors');
+                        displayError.textContent = result.error.message;
+
+                        // Re-enable the submit button
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Pay'; // Reset button text
+                    } else {
+                        // Insert the token into the form and submit
+                        const hiddenInput = document.getElementById('stripeToken');
+                        hiddenInput.value = result.token.id;
+
+                        // Submit the form
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            App.init();
+        });
+
+    </script>
 </body>
 
 </html>

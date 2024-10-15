@@ -6,6 +6,8 @@ from .models import *
 from django.contrib import messages
 from django.conf import settings
 import stripe
+from datetime import datetime
+
 # Create your views here.
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 def index(request):
@@ -46,43 +48,76 @@ def about_us(request,):
 
 def faq(request,):
  return render(request ,'faq.html',)
-@login_required
+@login_required(login_url='loginuser')
 def checkout_cart(request,):
   user=request.user
   Cart=cart.objects.filter(user_id=user.id).select_related('pro_id')
   grand_total = sum(item.total for item in Cart)
   return render(request, 'checkout_cart.html',{'cart':Cart,'grand_total':grand_total})
-@login_required
+@login_required(login_url='loginuser')
 def checkout_complete(request,):
  return render(request, 'checkout_complete.html',)
-@login_required
+@login_required(login_url='loginuser')
 def checkout_info(request,):
  return render(request, 'checkout_info.html',)
-@login_required
+@login_required(login_url='loginuser')
 def Shipping(request,grand_total):
-   return render(request, 'checkout_info.html',{'grand_total':grand_total,'key':stripe.api_key})
-@login_required
+  address=get_object_or_404(Address,user_id=request.user.id)
+  return render(request, 'checkout_info.html',{'grand_total':grand_total,'address':address,'key':settings.STRIPE_TEST_PUBLIC_KEY})
+@login_required(login_url='loginuser')
 def checkout_payment(request,):
   return render (request,'checkout_payment.html')
-@login_required
+@login_required(login_url='loginuser')
 def checkout_payments(request,grand_total):
+  if request.method=='POST':
+    user=request.user
+    phone=request.POST['primary_phone']
+    address=request.POST['address']
+    company=request.POST['company_name']
+    zip_code=request.POST['zip_code']
+    area_code=request.POST['area_code']
+    check_box=request.POST.get('agree') == 'on'
+    if Address.objects.filter(user_id=request.user.id).exists():
+      adr = Address.objects.get(user_id=user)
+      adr.adress = address
+      adr.area_code = area_code
+      adr.phone = phone
+      adr.zip_code = zip_code
+      adr.company = company
+      adr.bussiness = check_box
+      adr.save()
+    else:
+      adr=Address.objects.update(user_id=user,adress=address,area_code=area_code,phone=phone,zip_code=zip_code,company=company,bussiness=check_box) 
+      adr.save()
   return render (request,'checkout_payment.html',{'grand_total':grand_total})
-@login_required
+@login_required(login_url='loginuser')
 def pay(request, grand_total):
     if request.method == 'POST':
+        user=get_object_or_404(User,id=request.user.id)
+        adress=get_object_or_404(Address,user_id=request.user.id)
+        Cart=cart.objects.filter(user_id=request.user.id)
+        items=', '.join([item.pro_id.name for item in Cart])
         token = request.POST.get('stripeToken')
         if token:  # Check if token is provided
             try:
-                charge = stripe.Charge.create(
-                    amount=grand_total*100,
-                    currency='usd',
-                    description='Payment for order',
-                    source=token,
-                )
+              charge = stripe.Charge.create(
+                  amount=grand_total*100,
+                  currency='usd',
+                  description=f'Payment for{items}',
+                  source=token,
+                  metadata={
+                    'name':user.username,
+                    'email':user.email,
+                    'Address':adress.adress,
+                    
+                  }
+              )
                 
-                Cart=cart.objects.filter(user_id=request.user.id)
-                Cart.delete()
-                return redirect('checkout_complete')  # Redirect on successful payment
+              Cart=cart.objects.filter(user_id=request.user.id)
+              Cart.delete()
+              current_time = datetime.now()  # Avoid using 'time' as a variable name
+              date = current_time.strftime('%Y-%m-%d %H:%M:%S')
+              return render(request,'checkout_complete.html',{'date': date})  # Redirect on successful payment
             except stripe.error.StripeError as e:
                 return render(request, 'checkout_payment.html', {'error': str(e), 'grand_total': grand_total})
         else:
@@ -100,7 +135,7 @@ def index_fixed_header(request,):
 
 def index_inverse_header(request,):
  return render(request, 'index_inverse_header.html',)
-@login_required
+@login_required(login_url='loginuser')
 def my_account(request,):
  return render(request, 'my_account.html',)
 
@@ -163,7 +198,7 @@ def register(request,):
 def logoutuser(request):
  auth_logout(request)
  return redirect('index')
-@login_required
+@login_required(login_url='loginuser')
 def add_to_cart(request,product_id):
   user=request.user
   if user.is_authenticated:
@@ -178,12 +213,12 @@ def add_to_cart(request,product_id):
     messages.info(request,"Register yourself to our web to get advance facilities")
     return redirect('register')
   return redirect('index')
-@login_required
+@login_required(login_url='loginuser')
 def remove_cart_item(request,product_id):
   Cart=cart.objects.filter(pro_id=product_id).select_related('user_id')
   Cart.delete()
   return redirect('index')
-@login_required
+@login_required(login_url='loginuser')
 def ammount(request, qty, item_id):
     user = request.user
     cart_item = cart.objects.filter(user_id=user.id, id=item_id).select_related('pro_id').first()

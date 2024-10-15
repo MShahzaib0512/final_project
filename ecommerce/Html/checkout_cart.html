@@ -422,17 +422,11 @@
                                             </td>
                                             <td class="cart-total text-center" id="total-{{ item.id }}">
                                                 {% if item.total %}
-                                                $<span>
-                                                    {{item.total}}
-                                                </span>
+                                                $<span>{{item.total}}</span>
                                                 {% elif item.pro_id.disc_price %}
-                                                $<span>
-                                                    {{item.disc_price}}
-                                                </span>
+                                                $<span>{{item.disc_price}}</span>
                                                 {% else %}
-                                                $<span>
-                                                    {{item.price}}
-                                                </span>
+                                                $<span>{{item.price}}</span>
                                                 {% endif %}
                                             </td>
                                         </tr>

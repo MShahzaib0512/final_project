@@ -388,10 +388,11 @@
                                 </div>
                             </div>
                             <div class="checkout-footer">
-                                <a href="{% url 'checkout_info' %}" class="btn btn-white btn-lg pull-left">Back</a>
+                                <a href="{% url 'Shipping' grand_total %}"
+                                    class="btn btn-white btn-lg pull-left">Back</a>
                                 <button id="submit-button" class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10"
                                     type="submit" aria-label="Pay for the order">Pay</button>
-                                <div id="card-errors" role="alert" style="color: red;"></div>
+                                <div id="card-errors" role="alert" style="color: red;">{{error}}</div>
                             </div>
                             <input type="hidden" name="stripeToken" id="stripeToken">
                         </div>

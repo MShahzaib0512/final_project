@@ -359,6 +359,7 @@
                 <div class="checkout">
                     <form action="{% url 'checkout_payments' grand_total %}" method="POST" name="form_shipping"
                         class="form-horizontal">
+                        {% csrf_token %}
                         <!-- BEGIN checkout-header -->
                         <div class="checkout-header">
                             <!-- BEGIN row -->
@@ -388,7 +389,8 @@
                                     First Name <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="first_name" value="" placeholder="" />
+                                    <input type="text" class="form-control" name="first_name"
+                                        value='{{address.user_id.first_name}}' placeholder="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -396,16 +398,17 @@
                                     Last Name <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="last_name" value="" placeholder="" />
+                                    <input type="text" class="form-control" name="last_name"
+                                        value="{{address.user_id.last_name}}" placeholder="" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4">
                                     Company Name (optional)<span class="text-danger">&nbsp;</span>
                                 </label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="company_name" value=""
-                                        placeholder="" />
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="company_name"
+                                        value="{{address.company}}" placeholder="Name of your company" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -413,7 +416,8 @@
                                     Area Code <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="area_code" value="" placeholder="" />
+                                    <input type="number" class="form-control" name="area_code"
+                                        value="{{address.area_code}}" placeholder="012" maxlength="5" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -421,8 +425,8 @@
                                     Primary Phone <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="primary_phone" value=""
-                                        placeholder="" />
+                                    <input type="number" class="form-control" name="primary_phone"
+                                        value="{{address.phone}}" placeholder="03123456789" maxlength="11" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -430,9 +434,8 @@
                                     Street Address <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control m-b-10" name="address_1" value=""
+                                    <input type="text" class="form-control" name="address" value="{{address.adress}}"
                                         placeholder="" />
-                                    <input type="text" class="form-control" name="address_2" value="" placeholder="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -440,7 +443,8 @@
                                     ZIP Code<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="zip_code" value="" placeholder="" />
+                                    <input type="number" class="form-control" name="zip_code"
+                                        value="{{address.zip_code}}" placeholder="12345" maxlength="9" />
                                     <p class="help-block m-b-0">Enter ZIP for City and State ZIP Code</p>
                                 </div>
                             </div>
@@ -450,11 +454,14 @@
                                 </label>
                                 <div class="col-md-4">
                                     <label class="f-w-500">
-                                        <input type="checkbox" name="business_address" value="1" />
+                                        {% if address.bussiness %}
+                                        <input type="checkbox" name="agree" checked />
+                                        {% else %}
+                                        <input type="checkbox" name="agree" />
+                                        {% endif %}
                                         This is a business address
                                         <a href="#" class="m-l-5 text-muted" data-toggle="tooltip" data-trigger="hover"
-                                            data-placement="top"
-                                            data-title="This helps us choose the best shipping method for you. Business shipments are normally delivered on weekdays by 5:00 p.m. local time. Residential shipments are normally delivered Monday - Saturday by 8:00 p.m. local time.">
+                                            data-placement="top" data-title="Tooltip text...">
                                             <i class="fa fa-question-circle"></i>
                                         </a>
                                     </label>
@@ -473,8 +480,9 @@
                         <!-- BEGIN checkout-footer -->
                         <div class="checkout-footer">
                             <a href="{% url 'checkout_cart' %}" class="btn btn-white btn-lg pull-left">Back</a>
-                            <a href="{% url 'checkout_payments' grand_total %}"
-                                class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10">Continue</a>
+                            <!-- <a href="{% url 'checkout_payments' grand_total %}"
+                                class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10">Continue</a> -->
+                            <input type="submit" class="btn btn-inverse btn-lg p-l-30 p-r-30 m-l-10" value="Continue">
                         </div>
                         <!-- END checkout-footer -->
                     </form>

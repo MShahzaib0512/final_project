@@ -45,4 +45,11 @@ class cart(models.Model):
   total=models.IntegerField(null=True,blank=True,default=0)
   grand_total=models.IntegerField(null=True,blank=True,default=0)
   
-  
+class Address(models.Model):
+  user_id=models.ForeignKey(User,on_delete=models.CASCADE)
+  adress=models.CharField(max_length=100)
+  area_code=models.IntegerField()
+  phone=models.IntegerField()
+  zip_code=models.IntegerField()
+  company=models.CharField(max_length=20, null=True,blank=True)
+  bussiness=models.BooleanField(default=False)

@@ -62,8 +62,12 @@ def checkout_info(request,):
  return render(request, 'checkout_info.html',)
 @login_required(login_url='loginuser')
 def Shipping(request,grand_total):
-  address=get_object_or_404(Address,user_id=request.user.id)
-  return render(request, 'checkout_info.html',{'grand_total':grand_total,'address':address,'key':settings.STRIPE_TEST_PUBLIC_KEY})
+  try:
+    
+    address=get_object_or_404(Address,user_id=request.user.id)
+    return render(request, 'checkout_info.html',{'grand_total':grand_total,'address':address,'key':settings.STRIPE_TEST_PUBLIC_KEY})
+  except:
+    return render(request, 'checkout_info.html',{'grand_total':grand_total,'key':settings.STRIPE_TEST_PUBLIC_KEY})
 @login_required(login_url='loginuser')
 def checkout_payment(request,):
   return render (request,'checkout_payment.html')
@@ -117,7 +121,7 @@ def pay(request, grand_total):
               Cart.delete()
               current_time = datetime.now()  # Avoid using 'time' as a variable name
               date = current_time.strftime('%Y-%m-%d %H:%M:%S')
-              return render(request,'checkout_complete.html',{'date': date})  # Redirect on successful payment
+              return render(request,'checkout_complete.html',{'date': date,'grand_total':grand_total})  # Redirect on successful payment
             except stripe.error.StripeError as e:
                 return render(request, 'checkout_payment.html', {'error': str(e), 'grand_total': grand_total})
         else:

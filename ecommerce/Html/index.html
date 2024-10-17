@@ -351,9 +351,14 @@
                   {{ featured.description }}
                 </p>
                 <div class="price m-b-30 fadeInLeftBig animated">
+                  {% if featured.disc_price %}
+                  <small>from</small> <span>${{ featured.disc_price }}</span>
+                  {% else %}
                   <small>from</small> <span>${{ featured.price }}</span>
+                  {% endif %}
                 </div>
-                <a href="#" class="btn btn-outline btn-lg fadeInLeftBig animated">Buy Now</a>
+                <a href="{% url 'product_details' featured.id %}"
+                  class="btn btn-outline btn-lg fadeInLeftBig animated">Buy Now</a>
               </div>
             </div>
           </div>
